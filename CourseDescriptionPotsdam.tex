@@ -1,0 +1,193 @@
+\documentclass[10pt,a4paper]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{url}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\title{Computational Methods in Earth Sciences}
+\author{Andrew Wickert, PhD (\url{andrew.wickert@uni-potsdam.de})\\
+        \\
+        Universit\"{a}t Potsdam Summer Semester, 2015\\
+        Last updated \today}
+%\thanks{Universit\"{a}t Potsdam\\ \indent Summer Semester, 2015}
+%\date{\today}
+\lhead{}
+\rhead{Computational Methods in Earth Sciences (Last revised \today)}
+
+\begin{document}
+
+\maketitle
+
+\section{Course description}
+
+The objective of this course is to introduce students to a range of ways in which computers can help them analyze and process data, translate ideas and conceptual models into computer simulations, visualize their findings, and work alone or in teams to address research questions. Students will be introduced to the Python programming language, which is easy to learn and used broadly across the geosciences. They will work with real data sets and write models to understand systems that are of relevance to their research.
+
+\section{Required materials}
+\begin{itemize}
+ \item Bring a laptop computer to class; please email the instructor if this is a problem
+ \item Textbook, \emph{Think Python: How to Think Like a Computer Scientist}: PDF and HTML available at \url{http://www.greenteapress.com/thinkpython/}
+\end{itemize}
+
+\section{Learning goals}
+
+This course will be broken into four modules:
+\begin{enumerate}
+\item An introduction to the Python programming language
+	\begin{itemize}
+	\item Commands in Python
+	\item Imperative and object-oriented programming
+	\item Software architecture and (re)usability
+	\end{itemize}
+\item Working with data sets
+	\begin{itemize}
+	\item Text files, binary data files, spreadsheets, and specialized formats (e.g., NetCDF)
+	\item Plotting data
+	\item Basic data analysis
+	\item Optional: Introduction to GIS applications with Python
+	\end{itemize}
+\item Working with models
+	\begin{itemize}
+	\item Introduction to types of models
+	\item Differential equations review: simple analytical solutions, Taylor series approximations, and numerical solutions
+	\item Matrix algebra to solve systems of differential equations: applying the finite difference method
+	\end{itemize}
+\item Projects
+	\begin{itemize}
+	%\item Build components of a team project that is inspired by students' research
+	%\item Couple individual components into a team product using a community-built framework
+	\item Build software that will assist you in a topic of your choosing (ideally related to your research)
+	\item Learn how to use version-control software and appropriate licensing for collaborative work
+	\item Integration of data and models is encouraged
+	\item Present results at the end of the semester
+	\end{itemize}
+\end{enumerate}
+
+\section{Evaluation}
+
+Students taking the course for a grade will be evaluated on the basis of their contribution to the final project. This will include:
+%\begin{itemize}
+%\item Their own code as a standalone module \textbf{(50\%)}
+%	\begin{itemize}
+%	\item Clean structure and modular/reusable architecture
+%	\item Good comments and cleanly-presented algorithms
+%	\item Appropriate complexity and capability for the state of class progress
+%	\end{itemize}
+%\item The coupling of their code to their team's code \textbf{(20\%)}
+%\item A presentation (group) and short report (individual) that details the methods used, equations solved, data analyzed, and/or insights into natural systems gained from their work \textbf{(30\%)}
+%\end{itemize}
+
+\begin{itemize}
+ \item Participation and course-related work through the semester (35\%)
+ \item Final project code (50\%)
+ \item Final project presentation (15\%)
+\end{itemize}
+
+\section{Schedule}
+
+\begin{minipage}{\linewidth} 
+\noindent \textbf{30 April?, 8:15AM--11AM?, Room?}\\
+\textit{Programming: philosophy, problem-solving, and basic volcabulary}\\
+Reading: Chapters 1--2
+\begin{itemize}
+ \item \textbf{Before class:} Install Python Python 2.7.X on your computer. Please email the instructor if you have problems.
+ \begin{itemize}
+  \item Windows and Mac: Python(x,y) is the most open-source distribution, but Anaconda is the easiest to download and use. See \url{http://docs.continuum.io/anaconda/install.html}
+  \item Linux: ``apt-get install python-numpy python-scipy python-matplotlib ...'' or equivalent from your pacakage manager
+ \end{itemize}
+ \item \textbf{Before class:} Also install a nice programming editor like TextWrangler (Mac), Notepad++ (Windows), or gedit (every platform)
+ \item Editing and running Python: text editors, Spyder, iPython
+ \item Programming syntax
+ \item Variables and types
+ \item Loops and statements
+ \item Introduce version control software (goal: download course materials with git)
+ \item Exercise: Randomly-walking particle (or something else fairly simple that applies these skills)
+\end{itemize}
+\vspace{12pt}
+\end{minipage}
+
+%\begin{comment}
+\begin{minipage}{\linewidth}
+\noindent \textbf{08 May, 8:15AM--12PM}\\
+\textit{Classes, functions, modules, plotting}
+\begin{itemize}
+ \item \textbf{Before class:} Version control software installed and working
+ \item Introduction to namespaces
+ \item Python modules (built-in)
+ \item Functions
+ \item Classes and object-oriented programming
+ \item Using a pre-built module: Matplotlib for plotting
+ \item Exercise: Writing your own class for a block of rock/soil
+\end{itemize}
+\vspace{12pt}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\noindent \textbf{13 May?, 8:15AM--12PM?}\\
+\textit{Mathematical methods review; doing math in Python}
+\begin{itemize}
+ \item \textbf{Before class:} (Maybe) math review worksheet
+ \item Derivatives and differential operators
+ \item Integrals and numerical methods for integration
+ \item Vectors, matrices, and arrays
+ \item Dot products, cross products
+ \item Forward difference discretization of differential equations
+ \item Exercise: array and matrix operations: solving heat transport through your soil block from the week before
+\end{itemize}
+\vspace{12pt}
+\end{minipage}
+
+{
+\begin{minipage}{\linewidth}
+\noindent \textbf{22 May, 8:15AM--12PM}\\
+\textit{Working with data}
+\begin{itemize}
+ \item \textbf{Before class:} Bring a set of data you want to analyze; email the instructor to ensure that your data format will be covered
+ \item Text files
+ \item Spreadsheets
+ \item Binary files
+ \item NetCDF files
+ \item Geospatial data (if we get this far)
+ \item Exercise: using what we have learned for each of your data sets
+\end{itemize}
+\vspace{12pt}
+\end{minipage}
+}
+
+\begin{minipage}{\linewidth}
+\noindent \textbf{02, 03, 09 or 10 June?, 8:15AM--12PM?}\\
+\textit{Probability theory; integrating data sets and models}
+\begin{itemize}
+ \item Basic lecture: Modeling and finite difference methods Part 1
+ \item \textbf{Guest lecture:} Crystal Ng: Probability in the geosciences
+ \item Modeling hillslope evolution
+\end{itemize}
+\vspace{12pt}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\noindent \textbf{12 June}\\
+\textit{Finite Difference Methods -- the better way}
+\vspace{12pt}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\noindent \textbf{19 June}\\
+\textit{Final projects -- start of work}
+\vspace{12pt}
+\end{minipage}
+
+\noindent\emph{***INSTRUCTOR IN THE FIELD IN ARGENTINA 23 JUNE - 22-ISH AUG; WILL DO HIS BEST TO ANSWER EMAILS RELATED TO FINAL PROJECTS. SO GET STARTED REALLY EARLY!***}\\
+
+\begin{minipage}{\linewidth}
+\noindent \textbf{19 June}\\
+\textit{Final projects -- presentations}
+\vspace{12pt}
+\end{minipage}
+%\end{comment}
+
+\end{document}
