@@ -7,7 +7,7 @@
 
 \usepackage{listings}
 \usepackage{color}
-%\usepackage{url}
+\usepackage[hyphens]{url}
 \usepackage[colorlinks=true]{hyperref}
 
 \newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}} 
@@ -150,9 +150,20 @@ sudo apt-get install spyder
 
 \subsubsection{Windows}
 
+Download \textbf{python(x,y)} (\url{https://code.google.com/p/pythonxy/wiki/Downloads}) or another full-featured distribution such as \textbf{Anaconda}; both of these distributions have been tested successfully with gFlex. Python(x,y), Anaconda, and several others also contain the required packages (including the numerical libraries), the iPython console, and the Spyder IDE; \textbf{Spyder} (\url{https://code.google.com/p/spyderlib/}) is a nice IDE that will provide a familiar-looking interface for users accustomed to Matlab.
 
 \subsubsection{Mac}
 
+One recommendation is to use a package manager like \textbf{homebrew} (\url{http://brew.sh/}). With this you can install Python, and then move on to using \textbf{pip} (or homebrew) to install the Python modules. A good introduction to this can be found here: \url{http://www.thisisthegreenroom.com/2011/installing-python-numpy-scipy-matplotlib-and-ipython-on-lion}. See the \textbf{Linux} instructions for the list of packages that you will need; after installing pip, these commands can be substituted as follows, e.g.,
+
+\begin{lstlisting}[language=sh]
+# Homebrew
+sudo brew install python-numpy
+# Pip
+pip install numpy
+\end{lstlisting}
+
+Recent efforts to download Python distributions (both **Anaconda** and **Enthought**) have not met with success with both gFlex and GRASS, though **Anaconda** has been tested successfully with Windows. As a result, it should be more successful to keep the Python packages managed better by something like **homebrew** with **pip**.
 
 \section{Letters and numbers:A look from the computer's point of view}
 
@@ -163,6 +174,8 @@ Python does automatic typing *but* it is important to know these for general pro
 \section{Basic Python programming}
 
 The following sections provide a brief introduction to programming in Python. A more exhaustive treatment can be found in \todo{OTHER COURSE (UMN?)}
+
+Write this or refer users to the book? Maybe focus here on examples of usage in Earth science.
 
 \subsection{Basic types}
 
