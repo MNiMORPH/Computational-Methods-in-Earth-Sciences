@@ -93,7 +93,7 @@ Many of these reasons highlight why I have chosen to work with Python for this c
 \hline
 \textbf{Open-source} & \begin{tabular}{@{}c@{}}Fortran \\ C/C++ \\ Java\end{tabular} & \begin{tabular}{@{}c@{}}Python \\ R \\ Octave (Matlab clone)\end{tabular}  \\
 \hline
-\textbf{Proprietary} & C\# \\ Swift & \begin{tabular}{@{}c@{}}Matlab \\ IDL \end{tabular}
+\textbf{Proprietary} & C\# & \begin{tabular}{@{}c@{}}Matlab \\ IDL \end{tabular}
 \end{tabular}
 \end{center}
 \caption{Open-source and proprietary, interpreted and compiled, programming languages. For open-access and ease-of-use, we will be using Python, which is interpreted and open-source.}
@@ -179,13 +179,7 @@ pip install numpy
 
 Recent efforts to download Python distributions (both **Anaconda** and **Enthought**) have not met with success with both gFlex and GRASS, though **Anaconda** has been tested successfully with Windows. As a result, it should be more successful to keep the Python packages managed better by something like **homebrew** with **pip**.
 
-\section{Letters and numbers:A look from the computer's point of view}
-
-ASCII, binary, Unicode, int, uint, floating point
-
-Python does automatic typing *but* it is important to know these for general programming!
-
-\section{Basic Python programming}
+\section{Basic Python programming (and programming concepts in general)}
 
 The following sections provide a brief introduction to programming in Python. A more exhaustive treatment can be found in the textbook, \emph{Think Python: How to Think Like a Computer Scientist} (PDF and HTML available at \url{http://www.greenteapress.com/thinkpython/}).
 
@@ -291,10 +285,11 @@ Variables can be things like:
 a = 152 # Integer (int)
 b = 16.2 # "Floating point" number (float)
 c = 'Ada Lovelace' # Character string (str)
+c2 = "Lord Byron" # double quotes also define a string (str)
 d = True # Boolean (bool)
 \end{lstlisting}
 
-Each of these three examples is a different variable \textbf{type}, as noted in the comment (\# sign) after each entry. They behave differently. As might be expected, integers and floats play with each other better than do strings. The other important piece in the above code is the use of \textbf{=} as the \emph{assignment operator}. It assigns the value to that particular variable letter. This is quite powerful, as variables can allow a code to be flexible and work with a wide range of input values -- or even input types!
+Each of these four examples with distinct letters is a different variable \textbf{type}, as noted in the comment (\# sign) after each entry. They behave differently. As might be expected, integers and floats play with each other better than do strings. The other important piece in the above code is the use of \textbf{=} as the \emph{assignment operator}. It assigns the value to that particular variable letter. This is quite powerful, as variables can allow a code to be flexible and work with a wide range of input values -- or even input types!
 
 So now, in our above code, we can see that we have defined the variable ``counter'', and that it is an integer.
 \begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
@@ -313,6 +308,65 @@ This is important when you want to take advantage of the ways in which integers 
 Types apply to all values in a code, whether they are assigned to variables or just added ``on the fly'' to the code.
 
 Boolean values can be \lstinline{True} or \lstinline{False}. These are often used for ``flow control'', or telling your code how to step from one step to another. This is explained further in section \ref{s:loops}.
+
+Additional types for individual values include \lstinline{Null} for non-values and \lstinline{inf} for infinite values.
+
+\section{Letters and numbers:A look from the computer's point of view}
+
+Now that we've talked a bit about different variable types, I might explain why they are important. As we all know, computers record data in binary: 0 and 1. How does this turn into letters and numbers? Well, let's think a bit about how computers store data, because we all are familiar with that from saving files, buying hard drives, etc.
+
+\begin{itemize}
+ \item 1 bit can have two values: 0/OFF/FALSE/LOW and 1/ON/TRUE/HIGH. This is the fundamental unit of computation.
+ \item 8 bits in one byte
+ \item 1024 bytes in one kilobyte (KiB), though note that often a metric convention of 1000 is used for this and later conversions!
+ \item 1024 KiB in one megabyte (MiB)
+ \item ... and so on.
+\end{itemize}
+
+From this we already know that a \lstinline{bool}, which can be \lstinline{True} or \lstinline{False}, is 1 bit! This is really memory-efficient.
+
+Now let's look at the second value. What is special about 8 bits being in one byte? Well, we know that:
+\begin{equation}
+ 2^8 = 256
+\end{equation}
+Do you remember computers with 256-color displays? Exactly! They were using one byte per pixel to describe the color on the screen.
+
+When using numbers, we like to include zero. So instead of having a list of values that is [1, 2, 3, ..., 255, 256], we have one that is [0, ..., 255]. Does this sound familiar? Like, for example, a color-picker in a photo-editing or illustrating application? We call this an \textbf{unsigned 8-bit integer}. ``Unsigned'' means that it does not have anything to say whether it is positive or negative.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=.8\linewidth]{figures/Introduction/Lsb0.pdf}
+\end{center}
+\caption{Graphically, a byte can be displayed as a set of 1's and 0's. This shows an example at which the bit numbering starts at the right and goes left, but the more important piece to notice at this stage is just how the different blocks of 1's and 0's can combine to make a larger number, that then can represent something inside the computer.}
+\end{figure}
+
+\begin{figure}[h!]
+ \begin{center}
+ \includegraphics[width=.8\linewidth]{figures/Introduction/convert-hexadecimal-to-binary-C-.png}
+ \end{center}
+ \caption{Binary, hexadecimal, and decimal conversion table. From Nitin Kumar, \url{http://www.easycppcodes.com/conversion/program-to-convert-hexadecimal-to-binary-c/}}
+\end{figure}
+
+What happens if we want negative numbers? Well, we can choose the sign with one of our bits. But then we have only seven to give the values. Thus, we get a range of $-128$ -- $+127$ for \textbf{signed 8-bit integer}.
+
+8-bit inetegers are also helpful for printing letters. In ASCII, the American Standard Code for Information Interchange, which was first established in 1963, letters, numbers, symbols, and special ``control'' characters are designated by a seven-bit number with the last bit for optional error-checking. (The last bit was optional so it could be dropped to save costs when transmitting even this small amount of data was a big deal -- thus many teletype machines used 7 bits! This chart was published in February 1972.)
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=.8\linewidth]{figures/Introduction/ASCII_Code_Chart-Quick_ref_card.png}
+\end{center}
+\caption{ASCII is the most simple and possibly most widely-used way of encoding letters and numbers. Ever wonder why we can't have umlauts in email addresses? Or why so many people use all flat lines (hyphen, minus sign, and dashes) as the same thing? It's ASCII's fault! But there is only so much one can do with 128 characters.}
+\end{figure}
+
+The rules for bytes can then be extrapolated to 16-, 32-, and 64-bit values. These can generate huge integers!
+
+But what about numbers with a decimal place (\lstinline{float}). These ``floating point'' numbers store values in scientific notation, with one bit for the sign, some number of bits for the exponent, and some bits for the value that is then multiplied by 10 to the specified power. You might imagine that this can create rounding errors, as there are infinite numbers but only finite bits in such a representation. And indeed it does: see \emph{What Every Computer Scientist Should Know About Floating-Point Arithmetic} (\url{http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html}) to learn more.
+
+Python handles changes between these types, and the amount of memory required to store them, pretty much automatically. But not all programming languages do, and this is important to know for general programming literacy!
+
+\begin{framed}
+For a really nice review of how computers actually work, check out the first answer at \url{http://programmers.stackexchange.com/questions/81624/how-do-computers-work}. Also, you'll become qutie good friends with StackExchange/StackOverflow, as you can do a Google search on literally nearly any problem you may encounter while programming, find someone who already asked the question there, and find the best answer that typically explains what is going on really well. Much of my programming knowledge comes from Internet help, either by directly answering my question, or by giving me some ideas to help reason through it on my own!
+\end{framed}
 
 \subsection{Loops: for, while}
 \label{s:loops}
@@ -357,7 +411,7 @@ for i in range(3):
 
 \vspace{6cm}
 
-\subsection{Logical operators and flow control: if, else if, else, and, or}
+\subsection{Logical operators and flow control: if, else if, else, and, or, not}
 
 \begin{framed}
  See Chapter 5 in Downey for a much more thorough introduction
@@ -380,6 +434,10 @@ if counter == 50 * 10**3:
 else:
   sys.exit("Fail!")
 \end{lstlisting}
+
+These logical operators can be nested together with loops using \lstinline{for} and \lstinline{while} to generate more complex sets of expressions. For example, you could say that while one value is true, if another value is less than five, you multiply it by five. While there would probably be no reason to ever execute this simple example, it is possible to imagine another case -- in which each pass through a \lstinline{for} loop was one step in time, and then you would change the position of rock units \lstinline{if} a condition for fault slip has been met. And then, for example, you would reset the fault-slip condition so it could accumulate strain before the next earthquake. While fault slip and interseismic strain are complex topics, not accurately represented in such a simple model, it is possible to imagine this approach as a way to accomplish many tasks when programming.
+
+If you want to string together multiple conditions for something there are two options. Either you can create multiple nested \lstinline{if}/\lstinline{else} loops, or you can (usually more efficiently) use statements like \lstinline{and}, \lstinline{or}, and \lstinline{not} to combine conditions. You can think of \lstinline{and} like multiplication: if one is \lstinline{True} (1) and the other is \lstinline{False} (0), then the outcome is \lstinline{False}. Likewise, \lstinline{or} is a bit like addition in that so long as at least one condition is \lstinline{True} (1), then the sum will be $>0$. This is \emph{like} addition in that the result of many \lstinline{or} statements will never be $>1$. I mention this because it is also possible to have multiple variables with mathematical operators, such as addition and multiplication, that tell the computer whether or not to execute an if-statement. An important note is that negative values are also \lstinline{False}. This can be quite useful when writing numerical models in which the sign of a value, or its being nonzero, determines what the model should do. \lstinline{not} returns \lstinline{True} when the statement that it is evaluating is \lstinline{False}.
 
 \subsection{Exceptions: try and except}
 
@@ -408,6 +466,8 @@ See Downey, p. 15
 See Downey, p. 16, 18
 \end{framed}
 
+The most common operators 
+
 Operators work on numbers how you would expect; please see Downey about how they work with strings (or just experiment!). Also, note this code from above with regard to variable type:
 \begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
 print "Now let's divide counter by 25001, just over half"
@@ -418,23 +478,142 @@ print counter/25001.
 \end{lstlisting}
 When an integer is divided by another integer, the code always rounds down. When there is a floating point number involved, it then gives a more exact solution.
 
-\subsection{Types that combine several items: lists, tuples, Numpy arrays}
+\subsection{Types that combine several items, 1: lists, (dictionaries), tuples}
 \label{s:containerTypes}
 
-\subsection{Variables are references}
+\begin{framed}
+See Downey, Chapters 10: Lists, 11: Dictionaries, and 12: Tuples
+\end{framed}
 
+\lstinline{int}, \lstinline{float}, \lstinline{bool}, and \lstinline{str} are four common possible \textbf{types} that single values may have. But these single values may be nested within structures with more complexity. One example of these is a \lstinline{list}. Another is a \lstinline{tuple}. They differ primarily in that items inside lists may be changed, while those inside tuples may not be. Lists and tuples are indexed starting with 0, and these indices are placed within brackets when selecting values. They may contain a mix of variable types. This is a lot to take in in a fairly dense paragraph, so I will really point you to three (!) book chapters, and use the following code example to show some important pieces in working with them:
+
+This provides an example of usage
 \begin{lstlisting}
- 
+l = [1, 2, 3, 4, 5] # list
+t = (1, 2, 3, 4)    # tuple
+
+# You index starting at 0
+print l[0] # it is 1!
+
+# Indices that are negative give you values starting from the end!
+print t[-1]
+
+# You use a colon to indicate multiple indices
+# This is INCLUSIVE of the first value but EXCLUSIVE of the second value!
+print l[0:2] # you get 0 and 1
+# If you do not have a value before or after the colon, it is assumed
+# that you want all values before or after the one that you have listed
+print l[:3]
+print t[-2:]
+print t[:]
+print t, "Is the same as the printout right above!"
+
+# Tuples and lists may contain multiple variable types
+l2 = [1, 2.16, True, 'Cow']
+t2 = [1, 5., False, 'Duck']
+
+# Tuples are immutable: you may not change their values. But lists are not.
+print "In a list, a Cow can change to a Duck"
+print l2
+print "Abra cadabra!"
+l2[-1] = 'Duck'
+print l2
+
+print "But in a Tuple, we can't change 'Duck' to 'Cow' -- or anything!"
+print t2
+print "Abra cadabra!"
+try:
+  t2[-1] = 'Cow'
+except:
+  print 'Magic trick failed!' # Single and double quotes both define strings
+  
+# Lists can be concatenated with "+", just like strings
+print l + l2
+
+# And can be repeated with "*", just like strings.
+print l*3
+
+# If you have a value that changes with time
+# and you want to record how it changes,
+# you can use the list "Append" command to expand a list
+dogs_at_park = [] # empty list
+for i in range(5):
+  j = i**2
+  dogs_at_park.append(j)
+print "The number of dogs at the park is growing quadratically!"
+
+# When you are just using values, variables capture the value
+# (i.e. make a copy of it)
+# and that stays the same no matter what happens to the original
+a = 5
+b = a
+a -= 1
+print 'a = ', a, '; b =',  b, ": they are different if you change a scalar"
+
+# But varibales just point to a reference to containers for variables like lists.
+# Hence, values are shared
+a = [5]
+b = a
+a[0] -= 1
+print 'a =', a, '; b =', b
+print "for lists, a and b change in tandem!"
 \end{lstlisting}
 
+Dictionaries are very useful, but will not be discussed here, beyond noting that they connect keyword--value pairs. Please read Chapter 11 in Downey's book to learn more about them.
 
+\subsection{Numpy, namespaces, and numpy arrays}
 
-\subsection{Why does this all work? How do computers work?}
+I mentioned Python modules briefy above; a module is a set of functions and/or variables that can be useful for a specific task. ``Numpy'', which stands for ``Numerical Python'', is a module that we will use quite often. To import it at the start of a script, we write:
+\begin{lstlisting}
+import numpy as np
+\end{lstlisting}
+The ``as np'' portion of this means that we have only to write ``np.'' before any numpy command or variable instead of ``numpy.''. For example:
+\begin{lstlisting}
+import numpy as np
 
+print np.pi
+print np.e
+\end{lstlisting}
 
+One could also write:
+\begin{lstlisting}
+from numpy import *
+
+print pi
+print e
+\end{lstlisting}
+and forego all of the ``np.*'' alltogether. However, let's say that you forget that ``e'' is a special character and decide you want it to be the number of electroncs in your sample.
+\begin{lstlisting}
+from numpy import *
+
+e = 5128
+
+print pi
+print e
+print "Oh, no! We lost Euler"
+\end{lstlisting}
+This is an introduction to a very important concept, which is protecting \textbf{namespaces} so you do not accidentally ovewrite functions or variables. 
+
+To learn about Numpy, there are major resources.
+
+\begin{enumerate}
+ \item There is a really nice tutorial at \url{http://wiki.scipy.org/Tentative_NumPy_Tutorial}
+ \item For those of you familiar with Matlab, there is a chart of equivalent functions, operators, etc. at \url{http://mathesaurus.sourceforge.net/matlab-numpy.html}.
+\end{enumerate}
+
+You should become familiar with numpy arrays, as they will become the basis for much of what we do in this class!
+
+\subsection{Plotting values}
+
+Plotting doesn't exactly fall into ``standard'' programming -- but hey, you'll be doing scientific programming, and it is important! The great thing about being able to write computer scripts that generate plots is that if your data change or if you want to do something different, you don't have to start from nothing. Plus, those generated by Python's module, Matplotlib, look so much nicer than any default Excel plot.
+
+To learn how to use Matplotlib, see the online tutorial at \url{http://matplotlib.org/users/pyplot_tutorial.html}.
 
 \section{Writing programs}
 
+All right! You finished the basics. Or you skipped them. Whatever, either way you're ready to start writing computer programs. That is great.
+
+First-off, you should know that there are two general programming paradigms. \todo{start here next time!}
 
 \subsection{imperative}
 
