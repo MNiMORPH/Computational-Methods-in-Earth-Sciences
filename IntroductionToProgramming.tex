@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{amsart}
+\documentclass[a4paper,10pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 
 % Title Page
@@ -6,6 +6,10 @@
 \author{Andrew D. Wickert}
 
 \usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+\lstset{mathescape,basicstyle=\ttfamily} % Allow escaping to LaTeX inside $..$
+
 \usepackage{color}
 \usepackage[hyphens]{url}
 \usepackage[colorlinks=true]{hyperref}
@@ -63,6 +67,13 @@ Computer programming languages are a set of commands that we write in human-read
  \item In an \textbf{interpreted language} (or ``scripting language''), your commands are not compiled into byte code (machine language) \textit{en masse}. Rather, they all reference pre-compiled functions. Because of this, you don't have to re-compile the program every time you change it and your coding can be very flexible, but these programs often run somewhat slower than compiled programs. This is the trade-off: ease of programming for you costs computational efficiency in this case.
 \end{itemize}
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=.8\linewidth]{figures/Introduction/Compilervrsinterpreter.JPG}
+\end{center}
+\caption{Compiltered languages are pre-processed (i.e. compiled) for efficiency for the computer (but not the human!). Interpreted languages are processed at runtime -- one less step for developers (i.e. humans), but more effort for the computer. Image from Aniket Thakur at \url{http://opensourceforgeeks.blogspot.com/2013/03/difference-between-compiler-interpreter.html}.}
+\end{figure}
+
 \section{Python and the major programming languages}
 
 In this course, we will learn Python. It is an interpreted, multi-paradigm, multi-purpose, and easy-to-read open-source language. These mean that:
@@ -75,15 +86,18 @@ In this course, we will learn Python. It is an interpreted, multi-paradigm, mult
 \end{itemize}
 Many of these reasons highlight why I have chosen to work with Python for this course. However, it is important to go over a number of the other major programming languages used in the geosciences, at very least such that their names are familiar to you and you will not feel like you are starting from nothing if you have to program in one of them someday. These are:
 
+\begin{figure}
 \begin{center}
 \begin{tabular}{l|c|c}
  & \textbf{Compiled} & \textbf{Interpreted} \\
 \hline
 \textbf{Open-source} & \begin{tabular}{@{}c@{}}Fortran \\ C/C++ \\ Java\end{tabular} & \begin{tabular}{@{}c@{}}Python \\ R \\ Octave (Matlab clone)\end{tabular}  \\
 \hline
-\textbf{Proprietary} & ? & \begin{tabular}{@{}c@{}}Matlab \\ IDL \end{tabular}
+\textbf{Proprietary} & C\# \\ Swift & \begin{tabular}{@{}c@{}}Matlab \\ IDL \end{tabular}
 \end{tabular}
 \end{center}
+\caption{Open-source and proprietary, interpreted and compiled, programming languages. For open-access and ease-of-use, we will be using Python, which is interpreted and open-source.}
+\end{figure}
 
 C, C++, and Fortran (f77 and f95) are the most commonly-used compiled programming langauges for scientific computing. These are the true ``heavy lifters'' in computational science. Fortunately, Python is written in C (giving it a native interface with C code), and a compiler called ``f2py'' allows Fortran code to be compiled in such a way that Python can talk to it. Java is occasionally used, but is less developed in the numerical realm.
 
@@ -173,34 +187,249 @@ Python does automatic typing *but* it is important to know these for general pro
 
 \section{Basic Python programming}
 
-The following sections provide a brief introduction to programming in Python. A more exhaustive treatment can be found in \todo{OTHER COURSE (UMN?)}
+The following sections provide a brief introduction to programming in Python. A more exhaustive treatment can be found in the textbook, \emph{Think Python: How to Think Like a Computer Scientist} (PDF and HTML available at \url{http://www.greenteapress.com/thinkpython/}).
 
-Write this or refer users to the book? Maybe focus here on examples of usage in Earth science.
+\subsection{So you want to write a program}
 
-\subsection{Basic types}
+By now, you know that a program is a set of user-readable text that the computer can understand and use to drive its actions. Even though at this point you might not be familiar with a program, immersion is a way of learning, so here is a simple program that we will use for examples in the next several sections.
 
-\subsection{}
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
 
-\subsection{A first program}
+#! /usr/bin/env python
+
+# firstExample.py
+# 
+# Written by ADW on 05 May 2015
+# while finishing these notes at the last minute
+# (as usual) to teach class tomorrow
+# 
+# This program will continue adding numbers to a starting
+# value until the number reaches 50.
+# It then multiplies this by 2 three times.
+
+import sys
+
+counter = 0 # value to be modified
+
+while counter < 50:
+  counter += 1
+
+if counter == 50:
+  # It should at this point!
+  print "50!"
+else:
+  print "Error!"
+  
+for i in range(3):
+  # i = [0, 1, 2] (0-indexing)
+  counter *= 10
+
+if counter == 50 * 10**3:
+  print "Checks out -- done!"
+  print "Final counter =", counter
+else:
+  sys.exit("Fail!")
+  
+print "Now let's divide counter by 25001, just over half"
+print counter/25001
+
+print "Now let's divide counter by 25001., just over half"
+print counter/25001.
+
+\end{lstlisting}
+
+Before going any further, I will make a note of a couple of pieces of this code here:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+#! /usr/bin/env python
+\end{lstlisting}
+This is the ``shebang''. It is important on Unix-like operating systems (e.g., Linux, Mac) to tell the computer which interpreter to use.
+
+Next,
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+#! /usr/bin/env python
+
+# firstExample.py
+# 
+# Written by ADW on 05 May 2015
+# while finishing these notes at the last minute
+# (as usual) to teach class tomorrow
+# 
+# This program will continue adding numbers to a starting
+# value until the number reaches 50.
+# It then multiplies this by 2 three times.
+\end{lstlisting}
+The pound sign (hashtag!), \#, denotes comments. These can be used throughout your code. And they should be used! Many hours of work writing code are often rendered useless when someone else tries to use it only to find no comments among a pile of expressions in a computer language. Even worse, many people have been known to not recognize their own code 6 months or 1 year out unless they have written good comments. Get in a habit of writing many good comments early, and you will be better-off for it.
+
+\begin{framed}
+For comments, see Downey, p. 19
+\end{framed}
+
+In comments, I typically write the name of the code (in case I change it later -- to remember), the date that I started to write it (and perhaps other dates of significant code development), and my name or initials. I also write a short note about what the program does.
+
+After this, there is ``import'' call.
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+import sys
+\end{lstlisting}
+``import'' brings in a specific package of extra functions in Python. This is called a ``module''. Eventually, when you write programs, you may create your own modules that are related to the problems that you like to solve. Such a module may relate to, for example, solutions for stress inside the Earth. The module ``sys'', as its name suggests, connects to the computer system. Towards the end of the code,
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+  sys.exit("Fail!")
+\end{lstlisting}
+causes the program to crash if it is executed. This can be useful to provide an useful message to the user if something is badly wrong. Modules have many helpful functions, most of which do not abruptly terminate the operation!
+
+\subsection{Variables and basic types}
+
+\begin{framed}
+See Downey, pp. 13--15
+\end{framed}
+
+Variables can be things like:
+\begin{lstlisting}
+a = 152 # Integer (int)
+b = 16.2 # "Floating point" number (float)
+c = 'Ada Lovelace' # Character string (str)
+d = True # Boolean (bool)
+\end{lstlisting}
+
+Each of these three examples is a different variable \textbf{type}, as noted in the comment (\# sign) after each entry. They behave differently. As might be expected, integers and floats play with each other better than do strings. The other important piece in the above code is the use of \textbf{=} as the \emph{assignment operator}. It assigns the value to that particular variable letter. This is quite powerful, as variables can allow a code to be flexible and work with a wide range of input values -- or even input types!
+
+So now, in our above code, we can see that we have defined the variable ``counter'', and that it is an integer.
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+counter = 0 # value to be modified
+\end{lstlisting}
+
+What if we had wanted to make it a floating-point number? Well, we simply would put a decimal point after it.
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+counter2 = 0.
+\end{lstlisting}
+
+This is important when you want to take advantage of the ways in which integers and floating point numbers differ. See Section \ref{s:math} for a common example of this.
+
+Types apply to all values in a code, whether they are assigned to variables or just added ``on the fly'' to the code.
+
+Boolean values can be \lstinline{True} or \lstinline{False}. These are often used for ``flow control'', or telling your code how to step from one step to another. This is explained further in section \ref{s:loops}.
 
 \subsection{Loops: for, while}
+\label{s:loops}
 
-\subsection{Logical statements and flow control: if, else if, else}
+Loops repeat execution of a piece of code while a particular condition is met. In the above code:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+while counter < 50:
+  counter += 1
+\end{lstlisting}
+changes ``counter'' by adding 1 to it so long as ``counter'' is less than 50. Pretty simple right? Well, what if we changed it to this?
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+trouble = True
+while trouble == True:
+  counter += 1
+\end{lstlisting}
+``=='' is the logical equals expression; while ``='' assigns values, ``=='' checks for equivalency. Would the prgram ever end?
+
+\begin{framed}
+\textbf{The power of CTRL+C (Control+C, Strg+C):} It doesn't just copy text! It forcibly terminates your programs. Very useful for stopping mistakes from getting out of hand. Like infinite loops.
+\end{framed}
+
+Would this code create an infinite loop?
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+
+trouble = True
+while trouble:
+  counter += 1
+\end{lstlisting}
+Here, we are missing the \lstinline{== True} after \lstinline{Trouble}. However, this still works. Why is that? Well, the code simply evaluates whether the statement is nonzero when trying to decide whether to continue the \lstinline{while} loop. Consider \lstinline{while counter < 50} above, for example. An additional helpful piece of information: Boolean \lstinline{True} is 1 (and \lstinline{False} is 0).
+
+Another type of loop is a \lstinline{for} loop, in which the loop runs until you run out of values in a list. For example:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+for i in range(3):
+  # i = [0, 1, 2] (0-indexing)
+  counter *= 10
+\end{lstlisting}
+\lstinline{range} is a special Python command that creates a set of values that goes up to (but does not exceed) the value inside the parentheses. So, as the comment notes, \lstinline{range(3)} produces \lstinline{[0, 1, 2]}. These square brackets indicate that this is a \lstinline{list}, a variable type that is a container for other values; this is discussed in section \ref{s:containerTypes}.
+
+``Nesting'' is the process of combining multiple for loops. You may use the below space to write an example of nested loops and to write some thoughts about why you might want to do this.
+
+\vspace{6cm}
+
+\subsection{Logical operators and flow control: if, else if, else, and, or}
+
+\begin{framed}
+ See Chapter 5 in Downey for a much more thorough introduction
+\end{framed}
+
+Two portions of the code above use ``if'' and ``else''. This provides ``flow control'' for the code by giving causing events to be based on some set of inputs. In this case, it is fairly simple, but you can imagine much more complex trees of nested if/else loops.
+
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+if counter == 50:
+  # It should at this point!
+  print "50!"
+else:
+  print "Error!"
+\end{lstlisting}
+  
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+if counter == 50 * 10**3:
+  print "Checks out -- done!"
+  print "Final counter =", counter
+else:
+  sys.exit("Fail!")
+\end{lstlisting}
 
 \subsection{Exceptions: try and except}
 
-\subsection{Mathematical operators: }
+You may use \lstinline{try} and \lstinline{except} in a way that is similar to the logical operators. This takes an action that you knnow might fail in the \lstinline{try} portion, and instead of crashing the code, ``catches'' it and moves on to the \lstinline{except} portion.
 
-Math at last!
+\begin{framed}
+ See pages 162-163 (Downey)
+\end{framed}
 
-Floor division note (with types)
+\subsection{``Print'' and other statements}
 
-\subsection{Strings and string operators}
+\begin{framed}
+See Downey, p. 15
+\end{framed}
 
+\lstinline{print} sends the output to the screen. Try it! You can print several things on the same line by separating them with commans, as is accomplished in the second line of the above code, reproduced here:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+  print "Checks out -- done!"
+  print "Final counter =", counter
+\end{lstlisting}
+  
+\subsection{Operators: Mathematical and String}
+\label{s:math}
 
+\begin{framed}
+See Downey, p. 16, 18
+\end{framed}
+
+Operators work on numbers how you would expect; please see Downey about how they work with strings (or just experiment!). Also, note this code from above with regard to variable type:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+print "Now let's divide counter by 25001, just over half"
+print counter/25001
+
+print "Now let's divide counter by 25001., just over half"
+print counter/25001.
+\end{lstlisting}
+When an integer is divided by another integer, the code always rounds down. When there is a floating point number involved, it then gives a more exact solution.
 
 \subsection{Types that combine several items: lists, tuples, Numpy arrays}
+\label{s:containerTypes}
 
+\subsection{Variables are references}
+
+\begin{lstlisting}
+ 
+\end{lstlisting}
+
+
+
+\subsection{Why does this all work? How do computers work?}
 
 
 
@@ -215,9 +444,6 @@ Floor division note (with types)
 
 \subsection{Object-oriented}
 
-
-
-\section{General structure of computer programs}
 
 
 
