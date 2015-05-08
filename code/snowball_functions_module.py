@@ -9,7 +9,7 @@ def horizontal_momentum(rho, D):
   """
   Let's find its horizontal impact momentum when hitting a stopped object
   """
-  return rho * (4/3.) * np.pi * (D/2./1000.)**3 # [N]
+  return rho * (4/3.) * np.pi * (D/2./100.)**3 # [N]
 
 def travel_distance(rv, rh):
   """
@@ -27,5 +27,5 @@ def print_output(n, x, p):
   Print output
   """
   print n, 'travels', round(x,1), 'meters and strikes its target'
-  print 'with a momentum of', round(p,5), 'Newton-seconds.'
+  print 'with a momentum of', round(p,1), 'Newton-seconds.'
 

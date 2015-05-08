@@ -1,7 +1,6 @@
 import snowball_functions_module as sb
 
 # First run
-print "Run 1:"
 name = 'standard snowball'
 diameter = 10 # [cm]
 density = 450 # [kg / m^3]

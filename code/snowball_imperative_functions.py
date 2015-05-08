@@ -14,7 +14,7 @@ def horizontal_momentum(rho, D, rv):
   """
   Let's find its horizontal impact momentum when hitting a stopped object
   """
-  return rho * (4/3.) * np.pi * (D/2./1000.)**3 * rv # [N s]
+  return rho * (4/3.) * np.pi * (D/2./100.)**3 * rv # [N s]
 
 def travel_distance(rv, rh):
   """
@@ -32,11 +32,10 @@ def print_output(n, x, p):
   Print output
   """
   print n, 'travels', round(x,1), 'meters and strikes its target'
-  print 'with a momentum of', round(p,5), 'Newton-seconds.'
+  print 'with a momentum of', round(p,1), 'Newton-seconds.'
 
 
 # First run
-print "Run 1:"
 name = 'standard snowball'
 diameter = 10 # [cm]
 density = 450 # [kg / m^3]
@@ -69,3 +68,19 @@ print "Run 4:"
 print_output('wicked tiny iceball', travel_distance(35, 1.5), \
              horizontal_momentum(917, 7, 35) )
 print ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

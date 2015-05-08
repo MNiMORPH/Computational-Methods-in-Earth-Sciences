@@ -38,7 +38,7 @@ class Snowball(object):
     Let's find its horizontal impact momentum when hitting a stopped object
     """
     # And we don't need to return anything, because this c
-    self.p = self.density * (4/3.) * np.pi * (self.diameter/2./1000.)**3 \
+    self.p = self.density * (4/3.) * np.pi * (self.diameter/2./100.)**3 \
                             * self.release_velocity # [N s]
 
   def travel_distance(self):
@@ -55,5 +55,17 @@ class Snowball(object):
     Print output
     """
     print self.name, 'travels', round(self.x,1), 'meters and strikes its target'
-    print 'with a momentum of', round(self.p,5), 'Newton-seconds.'
+    print 'with a momentum of', round(self.p,1), 'Newton-seconds.'
+
+
+
+
+
+
+
+
+
+
+
+
 
