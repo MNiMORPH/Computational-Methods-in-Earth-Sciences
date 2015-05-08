@@ -1,14 +1,19 @@
-\documentclass[a4paper,10pt]{amsart}
+\documentclass[a4paper,10pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 
 % Title Page
 \title{Lectures ?--?: Numerical Methods}
 \author{Andrew D. Wickert}
+\date{Last updated \today}
 
 \usepackage{listings}
 \usepackage{color}
 %\usepackage{url}
 \usepackage[colorlinks=true]{hyperref}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
 
 \newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}} 
  
@@ -49,7 +54,92 @@
 \begin{document}
 \maketitle
 
+\section{Mathematics Review}
+
+\subsection{Derivatives}
+
+A derivative is the change in a function ($f(x)$) with respect to the change in the independent variable ($x$) as the interval ($\Delta x$) approaches 0:
+
+\begin{equation}
+ \frac{d}{{dx}}f\left( x \right) = \mathop {\lim }\limits_{\Delta x \to 0} \frac{{f\left( {x + \Delta x } \right) - f\left( x \right)}}{\Delta x }
+\end{equation}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.5\linewidth]{figures/NumericalAndMath/400px-Tangent_to_a_curve.png}
+\end{center}
+\caption{The graph of a function, drawn in black, and a tangent line to that function, drawn in red. The slope of the tangent line is equal to the derivative of the function at the marked point. (Text from \url{https://en.wikipedia.org/wiki/Derivative} on 2015.05.07; borrowing it because I couldn't find a better way to say it!)}
+\end{figure}
+
+\todo{Create a better figure for derivative definition and finite difference, with shown $\Delta x$}
+
+\subsection{Integrals}
+
+Integration 
+An indefinite integral 
+
+
+
+\begin{equation}
+\int_a^b \! f(x)\,dx = F(b) - F(a)
+\end{equation}
+
+\begin{equation}
+\int_a^b \! f(x)\,dx
+\end{equation}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.5\linewidth]{figures/NumericalAndMath/BerlinWannsee.jpg}
+\end{center}
+\caption{This ``S'' in the Berlin--Wannsee station sign is written in the old style. It is used for integrals to stand for ``sum'', as the area under a curve can be imagined to be a sum $\left( \sum \right)$ of every infinitessimally thin column of space under a curve.}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.5\linewidth]{figures/NumericalAndMath/IntegralExample.pdf}
+\end{center}
+\caption{An integral is the sum of all area under a curve. (Contributed to Wikimedia Commons by User:KSmrq)}
+\end{figure}
+
+
+\subsection{Taylor series}
+
+The Taylor series of any complex function $f(x)$ (i.e., $f(x) \in \mathbb{C}$) that is infinitely differentiable at a point $x_0$ approximates that function as a power series:
+\begin{equation}
+f(x_0)+\frac {f'(x_0)}{1!} (x-x_0)+ \frac{f''(x_0)}{2!} (x-x_0)^2+\frac{f^{(3)}(x_0)}{3!}(x-x_0)^3+ \cdots
+\end{equation}
+Or, in the more-compact summation notation, this is:
+\begin{equation}
+\sum_{n=0} ^ {\infty} \frac {f^{(n)}(x_0)}{n!} \, (x-x_0)^{n}
+\end{equation}
+where $n$ is the number of the derivative of $f$.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.8\linewidth]{figures/NumericalAndMath/Taylor_Approximation_of_sin(x).jpeg}
+\end{center}
+\caption{Increasing orders of the derivative $n$, denoted P$n$, where $n = 1, 2, 3, \cdots$, show the increasing approximation of a sum of polynomials to the sine function.}
+\end{figure}
+
+
+
+dot products
+
+cross products
+
+vectors
+
+tensors
+
+
 Meshes
+
+\section{Finite difference}
+
+\subsection{Discretization}
+
+You may have wondered why I covered derivatives and Taylor series right after one another
 
 Finite difference, finite element, and spectral
 

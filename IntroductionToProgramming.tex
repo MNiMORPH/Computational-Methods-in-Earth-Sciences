@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures 1--?: Introduction to Computer Programming and Python}
+\title{Lectures 1--2: Introduction to Computer Programming and Python}
 \author{Andrew D. Wickert}
 
 \usepackage{listings}
@@ -13,6 +13,7 @@
 \usepackage{color}
 \usepackage[hyphens]{url}
 \usepackage[colorlinks=true]{hyperref}
+\usepackage[T1]{fontenc}
 
 \newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}} 
  
@@ -164,7 +165,11 @@ sudo apt-get install spyder
 
 \subsubsection{Windows}
 
-Download \textbf{python(x,y)} (\url{https://code.google.com/p/pythonxy/wiki/Downloads}) or another full-featured distribution such as \textbf{Anaconda}; both of these distributions have been tested successfully with gFlex. Python(x,y), Anaconda, and several others also contain the required packages (including the numerical libraries), the iPython console, and the Spyder IDE; \textbf{Spyder} (\url{https://code.google.com/p/spyderlib/}) is a nice IDE that will provide a familiar-looking interface for users accustomed to Matlab.
+Download \textbf{python(x,y)} (\url{https://code.google.com/p/pythonxy/wiki/Downloads}) or another full-featured distribution such as \textbf{Anaconda} (\url{https://store.continuum.io/cshop/anaconda/}). These and several others also contain the required packages (including the numerical libraries), the iPython console, and the Spyder IDE; \textbf{Spyder} (\url{https://code.google.com/p/spyderlib/}) is a nice IDE that will provide a familiar-looking interface for users accustomed to Matlab. 
+
+\begin{framed}
+\textbf{Important: those of you with a pre-existing ArcGIS install that comes with its own (albeit more limited) version of Python, you sh Python(x,y) you should install Anaconda. Python(x,y) will not work.} It should be possible to link Arc to your new install of Python, but I am not sure if you will need to re-install Arc to make this work -- this would be recommended if you would like to program with ArcGIS, as you will have a more complete version of Python to use.
+\end{framed}
 
 \subsubsection{Mac}
 
@@ -178,6 +183,10 @@ pip install numpy
 \end{lstlisting}
 
 Recent efforts to download Python distributions (both **Anaconda** and **Enthought**) have not met with success with both gFlex and GRASS, though **Anaconda** has been tested successfully with Windows. As a result, it should be more successful to keep the Python packages managed better by something like **homebrew** with **pip**.
+
+\begin{framed}
+\textbf{If you do not have Arc and want to do GIS programming, three main options exist.} You may use GRASS GIS (\url{http://grass.osgeo.org/download/}, QGIS \url{https://www.qgis.org/en/site/forusers/download.html}), or simply use the GDAL an OGR libraries with Python.
+\end{framed}
 
 \section{Basic Python programming (and programming concepts in general)}
 
@@ -278,6 +287,7 @@ causes the program to crash if it is executed. This can be useful to provide an 
 
 \begin{framed}
 See Downey, pp. 13--15
+And for more on strings, see Downey, Chapters 8 and 9
 \end{framed}
 
 Variables can be things like:
@@ -311,7 +321,7 @@ Boolean values can be \lstinline{True} or \lstinline{False}. These are often use
 
 Additional types for individual values include \lstinline{Null} for non-values and \lstinline{inf} for infinite values.
 
-\section{Letters and numbers:A look from the computer's point of view}
+\section{Letters and numbers: A look from the computer's point of view}
 
 Now that we've talked a bit about different variable types, I might explain why they are important. As we all know, computers record data in binary: 0 and 1. How does this turn into letters and numbers? Well, let's think a bit about how computers store data, because we all are familiar with that from saving files, buying hard drives, etc.
 
@@ -333,14 +343,14 @@ Do you remember computers with 256-color displays? Exactly! They were using one 
 
 When using numbers, we like to include zero. So instead of having a list of values that is [1, 2, 3, ..., 255, 256], we have one that is [0, ..., 255]. Does this sound familiar? Like, for example, a color-picker in a photo-editing or illustrating application? We call this an \textbf{unsigned 8-bit integer}. ``Unsigned'' means that it does not have anything to say whether it is positive or negative.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=.8\linewidth]{figures/Introduction/Lsb0.pdf}
 \end{center}
 \caption{Graphically, a byte can be displayed as a set of 1's and 0's. This shows an example at which the bit numbering starts at the right and goes left, but the more important piece to notice at this stage is just how the different blocks of 1's and 0's can combine to make a larger number, that then can represent something inside the computer.}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
  \begin{center}
  \includegraphics[width=.8\linewidth]{figures/Introduction/convert-hexadecimal-to-binary-C-.png}
  \end{center}
@@ -351,11 +361,11 @@ What happens if we want negative numbers? Well, we can choose the sign with one 
 
 8-bit inetegers are also helpful for printing letters. In ASCII, the American Standard Code for Information Interchange, which was first established in 1963, letters, numbers, symbols, and special ``control'' characters are designated by a seven-bit number with the last bit for optional error-checking. (The last bit was optional so it could be dropped to save costs when transmitting even this small amount of data was a big deal -- thus many teletype machines used 7 bits! This chart was published in February 1972.)
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \begin{center}
 \includegraphics[width=.8\linewidth]{figures/Introduction/ASCII_Code_Chart-Quick_ref_card.png}
 \end{center}
-\caption{ASCII is the most simple and possibly most widely-used way of encoding letters and numbers. Ever wonder why we can't have umlauts in email addresses? Or why so many people use all flat lines (hyphen, minus sign, and dashes) as the same thing? It's ASCII's fault! But there is only so much one can do with 128 characters.}
+\caption{ASCII is probably the most simple and widely-used method of encoding letters and numbers. It was originally developed in the 1960's for telephone operators for teletype machines; this fa Ever wonder why we can't have umlauts in email addresses? Or why so many people use all flat lines (hyphen, minus sign, and dashes) as the same thing? It's ASCII's fault! But there is only so much one can do with 128 characters.}
 \end{figure}
 
 The rules for bytes can then be extrapolated to 16-, 32-, and 64-bit values. These can generate huge integers!
@@ -466,7 +476,28 @@ See Downey, p. 15
 See Downey, p. 16, 18
 \end{framed}
 
-The most common operators 
+\begin{table}[!h]
+\scriptsize
+\begin{tabular}{clll}
+Operator	& Numbers			& Strings (and lists)							& Booleans \\
+\hline
+$+$		& Addition			& Concatenation								&	OR 							\\
+		& $1.5 + 3 \rightarrow 4$	& \lstinline{'cow' + 's'} $\rightarrow$ \lstinline{'cows'}		& \lstinline{bool(True + False)} $\rightarrow$ \lstinline{True} \\
+		& 				& \lstinline{[1, 2] + ['cow']} $\rightarrow$ \lstinline{[1, 2, 'cow']}	& 								\\
+$-$		& Subtraction			&									& 	NOT (XOR)						\\
+		& $1.5 - 3 \rightarrow -1.5$	& 									& \lstinline{bool(True - False)} $\rightarrow$ \lstinline{True} \\
+$*$		& Multiplication		& Repetition								& 	AND							\\
+		& $1.5 - 3 \rightarrow -1.5$	& \lstinline{'cow' * 2} $\rightarrow$ \lstinline{'cowcow'}		& \lstinline{bool(True * False)} $\rightarrow$ \lstinline{False} \\
+		& 				& \lstinline{[1, 2] * 2} $\rightarrow$ \lstinline{[1, 2, 1, 2]}		& 								\\
+$/$		& Division			& 									& 								\\
+		& Division			& 									& 								\\
+$**$		& Exponentiation		& 									& 								\\
+		& $3**2 \rightarrow 9$		& 									& 								\\
+$\%$		& Modulus (remainder)		& 									& 								\\
+		& $15 \% 4 \rightarrow 3$	& 									& 								
+\end{tabular}
+\caption{Common operators.}
+\end{table}
 
 Operators work on numbers how you would expect; please see Downey about how they work with strings (or just experiment!). Also, note this code from above with regard to variable type:
 \begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
@@ -561,9 +592,49 @@ print "for lists, a and b change in tandem!"
 
 Dictionaries are very useful, but will not be discussed here, beyond noting that they connect keyword--value pairs. Please read Chapter 11 in Downey's book to learn more about them.
 
-\subsection{Numpy, namespaces, and numpy arrays}
+\subsection{Python modules}
 
-I mentioned Python modules briefy above; a module is a set of functions and/or variables that can be useful for a specific task. ``Numpy'', which stands for ``Numerical Python'', is a module that we will use quite often. To import it at the start of a script, we write:
+I mentioned Python modules briefy above; a module is a set of functions and/or variables that can be useful for a specific task. Python comes with a number of standard modules that assist with certain tasks. These include:
+\begin{itemize}
+ \item \lstinline{os}: Operating system-related tools
+ \item \lstinline{sys}: Access to some Python interpreter objects (objects are containers of functions and/or variables, and will be introduced later)
+ \item \lstinline{glob}: Pattern-matching, e.g., for listing files in directories
+ \item \lstinline{re}: Regular expressions (regex) for advanced pattern-matching; often helps to format messy data files (for a description of regex, see \url{https://en.wikipedia.org/wiki/Regular_expression})
+\end{itemize}
+
+Other useful modules that you should have installed (and you should now if you haven't) include:
+\begin{itemize}
+ \item \lstinline{scipy}: Special functions, solvers, mathematical tools
+ \item \lstinline{numpy}: Arrays and matrices, more mathematical tools (see \ref{s:numpy} below for more information)
+ \item \lstinline{matplotlib}: Plotting and graphics
+\end{itemize}
+
+
+Modules are imported at the beginning of your script as follows:
+\begin{lstlisting}[belowskip=-1.6\baselineskip, language=python]
+import os # Import it just as "os"
+
+print "our current directory is:"
+print os.getcwd()
+
+from os import path # imports one part of a module
+
+print "We can check if the current working directory is a directory,"
+print "which of course it is."
+print path.isdir(os.getcwd())
+print "And we can do it with "os" alone, because "path" is part of os.
+print os.path.isdir(os.getcwd())
+
+import numpy as np # Use "np." instead of "numpy." before commands
+
+from matplotlib import pyplot as plt # combination -- pyplot is plt, but base
+                                     # matplotlib is not imported
+\end{lstlisting}
+
+\subsection{Numpy, namespaces, and numpy arrays}
+\label{s:numpy}
+
+``Numpy'', which stands for ``Numerical Python'', is a module that we will use quite often. To import it at the start of a script, we write:
 \begin{lstlisting}
 import numpy as np
 \end{lstlisting}
@@ -613,19 +684,102 @@ To learn how to use Matplotlib, see the online tutorial at \url{http://matplotli
 
 All right! You finished the basics. Or you skipped them. Whatever, either way you're ready to start writing computer programs. That is great.
 
-First-off, you should know that there are two general programming paradigms. \todo{start here next time!}
+First-off, you should know that there are two general programming paradigms.
+\begin{itemize}
+ \item \textbf{Imperative} programs list a set of commands in order. These may include \textbf{functions}, pieces of code that take an input and return an output
+ \item \textbf{Object-oriented} programs combine variables and functions into ``objects'', which are then instantiated (created as a unique copy with specific attributes) and executed (run) by other code.
+\end{itemize}
 
-\subsection{imperative}
+We are going to use the example of a horizontally-thrown snowball to learn about how to write code like this. It outputs its maximum distance and horizontal impact momentum.
+
+\subsection{Imperative}
 
 \subsubsection{Without functions}
 
+\lstinputlisting{code/snowball_imperative.py}
+
 \subsubsection{With functions}
+
+\begin{framed}
+For more on functions, see Downey, Chapters 3 and 4.
+\end{framed}
+
+Here and beyond, one can use the functions to simply produce several outputs based on some inputs without copying and pasting the entire code.
+
+\lstinputlisting{code/snowball_imperative_functions.py}
+
+\subsubsection{Placing these functions in a module by themselves}
+
+\begin{framed}
+For more on custom modules, see Downey, pp. 166--167
+\end{framed}
+
+Module:
+\lstinputlisting{code/snowball_functions_module.py}
+
+Driver:
+\lstinputlisting{code/snowball_functions_module_driver.py}
 
 \subsection{Object-oriented}
 
+\begin{framed}
+For quite a lot more about objects, see Downey, Chapters 15--18
+\end{framed}
 
+We could have the class held in the same file or in a separate file. Because you already have experience with things being in different files from the above module import, we will introduce classes in a separate file. Pay attention to the comments as well as the docstrings (the latter are between two lines of \lstinline{"""}), as they help you to understand how the classes work.
 
+In short, a ``class'' is a concept -- think of it as a generic Lego set sitting on a shelf. There are infinite Lego sets. But when you ``instantiate'' one, you make it yours, and give it properties. To return to the snowball example, you can give it properties like density and horizontal release velocity that effect the output -- the distance it can be thrown (based on ballistics without air drag) and the impact momentum. So your Lego set, your snowball, your whatever -- they are your personalized version of this class.
 
+A class is instantiated as follows:
+\begin{lstlisting}
+import snowball
+myfluffball = snowball.snowball()
+\end{lstlisting}
+Then you can type \lstinline{myfluffball.} inside iPython and press ``tab'' twice to see the contents of the class -- variables and functions.
 
+Variables within the class belong to the class, and as default contain \lstinline{self.} in front of them (within the class) and the name of the instance when used outside of the class itself.
 
-\end{document}          
+Module with class:
+\lstinputlisting{code/snowball.py}
+
+Driver:
+\lstinputlisting{code/mysnowball.py}
+
+This concept becomes quite powerful when it can be applied to something like your Earth-science model or data analysis routine, in that it allows flexible reproducibility of your work.
+
+\section{Code philosophy}
+
+At this point, you know enough that I want to share a few points that I hold closely when writing computer code:
+
+\begin{itemize}
+ \item Write something you care about.
+ \item Reproducable results -- you want to produce something that will work consistently. And sometimes this means that you need to be careful when coding!
+ \item Keep the inputs separate from what runs the code. Having a module with a class that does the heavy lifting is a great way to do this; see the snowball class example, above.
+ \item Generalized: change variables in a central place, don't have to change multiple values (have one master vlaue that is referenced), etc.
+ \item But don't spend so much time making a single-use code perfect that you are wasting time... unless your goal is to learn how to write a really nice code!
+ \item Know when to make a tactical retreat -- don't stare at the computer trying random combinations of solutions. Leave, do something else, take a walk, do other work, ask a friend for help. These all help you avoid the computer black hole.
+\end{itemize}
+
+\section{Version control}
+
+When we are in the lab or in the field, we keep notebooks of important steps along the way so we can track our path through the work and share our work with others. When producing software, we want the same things. Therefore, computer scientists have built ``version control'' tools. These track changes you have made to your code by leaving bookmarks where you have ``committed'' the code, and help you to collaborate with others and manage release versions of your code.
+
+We can learn about version-control tools by interfacing with our course's own GitHub site. GitHub, uses ``git'', pronounced the same as ``get''. I could write a lot about it here, but it's been done before. So just go to this link and follow the help:
+
+\url{http://git-scm.com/doc}
+
+And if you prefer a video to describe some of this, well, this one seems okay:
+
+\url{https://www.youtube.com/watch?v=0fKg7e37bQE}
+
+Once you have done this, I challenge you to ``clone'' a copy of the course notes onto your home computer using the \lstinline{git clone <url>} command. You can then use \lstinline{git pull} to continually update your version of all of the course documentation.
+
+You are of course not required to post your code on github or to create an account. But if you do wish to work with git, it is good practice, wheher your are interested in academia or industry. And it can provide me a good way of helping you with your projects by creating a ``fork'' of what you have done (think of this as a fork in the road by which one set of code takes one path, and one takes another), making some changes, and then requesting to merge my fork back in with yours. (If you do not use git, we can still do this over email.) You can also use git to help each other with your projects. And this is really one main power of git and version-control in general: it streamlines collaboration.
+
+\section{An example model: random-walk diffusion}
+
+This last example is something we can go through as a class. I challenge you to use the concepts you have learned about writing good code to improve upon this -- consider how to make plotting less repetative, bundle the code into sections, and perhaps make it into a set of functions with inputs and outputs -- or even a class (object).
+
+\lstinputlisting{code/randomWalk1D_before_class.py}
+
+\end{document}
