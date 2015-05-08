@@ -10,10 +10,12 @@ import time
 ntracers = 5000
 stepsize = 1
 update_period = 10 # update every this many time steps
-plot_period = 100  # Plot every this many time steps
+plot_period = 10  # Plot every this many time steps
 final_time_step = 5000
 
 # Setup
+plt.ion() # Turn interactive mode on for plots -- draw as you go.
+          # This is replacing the experimental plt.show(block=False)
 tracers = np.zeros(ntracers) # Array of 0's
 tracer_id = np.arange(ntracers) + 1 # 1--500; can't do this with just range()
                                     # because + with lists is concatenation
@@ -35,7 +37,8 @@ plt.ylabel('Frequency of occurrence here') # illustrating other way to do this
 ax2.set_xlim(-2*np.sqrt(final_time_step), 2*np.sqrt(final_time_step))
 plt.ylim(0, ntracers/5.)
 plt.tight_layout() # Automatically c
-plt.show(block=False) # Allow script to keep running while plot is shown
+fig.canvas.draw()
+#plt.show(block=False) # Allow script to keep running while plot is shown
 time.sleep(0.1) # Time to look at plot
 
 # Run
@@ -65,3 +68,14 @@ for t in range(1, final_time_step + 1):
     plt.draw()
     #time.sleep(0.1) # Time to look at plot
     
+plt.show()
+
+
+
+
+
+
+
+
+
+
