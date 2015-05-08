@@ -56,16 +56,3 @@ class Snowball(object):
     """
     print self.name, 'travels', round(self.x,1), 'meters and strikes its target'
     print 'with a momentum of', round(self.p,1), 'Newton-seconds.'
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -69,18 +69,3 @@ print_output('wicked tiny iceball', travel_distance(35, 1.5), \
              horizontal_momentum(917, 7, 35) )
 print ""
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
