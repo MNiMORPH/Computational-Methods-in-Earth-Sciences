@@ -1,17 +1,22 @@
-\documentclass[a4paper,10pt]{amsart}
+\documentclass[a4paper,10pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures ?--?: Working with Files and Data}
+\title{Lectures 3--4: Working with Files and Data, including geospatial methods and plotting}
 \author{Andrew D. Wickert}
 
 \usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+\lstset{mathescape,basicstyle=\ttfamily} % Allow escaping to LaTeX inside $..$
+
 \usepackage{color}
-%\usepackage{url}
+\usepackage[hyphens]{url}
 \usepackage[colorlinks=true]{hyperref}
+\usepackage[T1]{fontenc}
 
 \newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}} 
- 
+
 % From http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings, modified a little
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -49,25 +54,153 @@
 \begin{document}
 \maketitle
 
-\section{Data storage}
+The geosciences are full of a range of data types---from mapping and surveys to chemical analyses to ``data'' from computer model outputs (spanning a whole range of complexities) to remotely-sensed images and more. Working with all of these data types in an efficient way is one of the primary uses of computers in the geosciences. In this section, you will learn:
 
-ASCII
+\begin{enumerate}
+ \item How computers store data
+ \item How to work with basic ASCII and binary data sets, using Numpy tools and basic file-reading operations.
+ \item How to work with spreadsheets (e.g., Excel) when programming
+ \item How to work with geospatial data both within Python on its own and within a GIS framework
+\end{enumerate}
 
-Binary -- many types
+\section{Data storage and retrieval, data plotting, GIS, and Python modules}
+
+Data can be stored as text (typically ASCII) or binary values. Often, one file contains one data set. However, more advanced data storage formats like NetCDF and HDF are also widely-used---these act as containers for multiple related pieces of multidimensional data. NetCDF is more common and is often used for amospheric, oceanographic, glaciologic---generally climate-related data. atmospheric science data and models. It is now also being used by the Community Surface Dynamics Modeling System (CSDMS) as a standard format for geological model input and output. HDF was developed by NASA, and therefore is often used for satellite remotely-sensed data. Unless you do quite a lot of work with these kinds of data and models, you may not come across these---but it is important to know at least a little about them.
+
+Along with the basics of data storage and retrieval, we are going to have to learn how to display the data. This will likely be one of the more useful skills taught in theis course, because you will learn how to write reusable computer code to generate publication-quality figures. Learnin gthe plotting commands takes a bit of time, as does writing the code---but in my experience, this saves hours in the long run. Having the ability to generate reusable plots also makes one more willing to revise data analyses, knowing that time will not be wasted \textit{per se} on laboriously recreating plots by hand. It also lets one make a whole set of similar plots for displaying large amounts of data.
+
+Oftentimes in the geosciences, we want to plot geospatial data. I will show how you can install mapping packages and use GIS tools to do just this. I will also point out and (in some cases) very briefly discuss the Python interfaces to GRASS GIS, Arc GIS, and QGIS, the three leading scientific geospatial platforms. These come with a set of premade tools to make it possible to run very involved analyses in just a few lines of code.
+
+Using some of these tools involves downloading and installing 
 
 \section{ASCII}
 
-CSV
+\subsection{Theory}
 
-Excel files
+In the Introductory notes, you learned about the ASCII table for encoding text. Each ASCII character requires 7 bits to be encoded. This increases to 8 bits, or 1 byte, as a ``stop'' bit is added---this was historically used to note if there was an error in the transmission.
+
+In ASCII, the number ``45'' would require 2 bytes of storage. ``61.083'' would require 6 bytes. ``-15E-3'', where ``E'' denotes that 15 is multipled by 10 to the following power (in this case, $-3$), would also require 6 bytes. In most situations, ASCII data take more storage space than binary data. They have the advantage, though, in that they are fully human-readable.
+
+\begin{framed}
+\noindent\textbf{The great line-ending schism}
+
+A very important historical note is the controversy about line-endings. It may sound trivial, but it can turn a successful data import into a failure! Here it is:
+\begin{itemize}
+ \item UNIX-based computers end lines of text with a newline character, \lstinline{\n} (ASCII 10)
+ \item DOS/Windows-based computers end lines of text with a carriage return, \lstinline{\r\n} (ASCII 13, then ASCII 10)
+\end{itemize}
+This seemingly small detail has its basis in the mechanics of the transition from typewriters to computers: with typewriters, one must advance to a new line (``line feed'' or ``newline'', ASCII 10) and push the roll of paper all the way back to the start of the line (``carriage return'', ASCII 13). Computers can instead produce a new line all at once, because they are not limited to moving paper in physical space. This led to ASCII 10 being used on UNIX systems, and the typewriter-looking [ASCII 13, ASCII 10] being used on Windows systems, and a potential whole world of trouble! It can mean that, if you have a file with delimited data (e.g., csv -- comma-separated values), that you cannot tell where one line ends and another begins if your computer looks for the wrong newline character! This is a problme that can often happen if, like most computer users, one is working on Windows but then needs to do a probject on a supercomputer (mostly UNIX). Many pieces of software are becoming smarter about this difference, but this is one of the great and unfortunate schisms in computing that happened in the early days, when we were really just learning what we are doing, and has been carried forward to the present.
+\end{framed}
+
+\subsection{Practice}
+
+OK, enough with the theory. Let's get our hands dirty! Figuratively, of course, in case you have been eating in a particularly messy way over your computer keyboard. (Aside: have you ever shaken out an old keyboard? Don't do it over your face. Especially not with your mouth open. No, I wouldn't know.)
+
+\begin{framed}
+As mentioned in the introductory section, there is a Matplotlib tutorial at \url{http://matplotlib.org/users/pyplot_tutorial.html}. And for those of you who like to learn about these sorts of things by following examples, Matplotlib has an excellent plotting gallery---a place where it shows you a whole range of graphics and how to create them, at \url{http://matplotlib.org/gallery.html}.
+\end{framed}
+
+You should have already installed \lstinline{numpy}. This is the numerical Python package and is important for doing work with all sorts of arrays. We are going to start by importing some data from an ASCII text file. In this case, it will be a simple transect of elevations across the park by where I grew up. We will use both the Numpy \lstinline{genfromtxt} feature to create a numpy array and the \lstinline{pandas read_csv} feature to generate a Pandas DataFrame. This example already includes plotting with matplotlib as does a section in the introductory notes. This, I hope, will be fairly self-explanatory.
+
+\lstinputlisting{code/FilesData/CSVexample.py}
+
+You can also save ASCII data using the \lstinline{np.savetxt} feature. I mostly use it as follows:
+\begin{lstlisting}
+np.savetxt('OUTPUT_FILE_NAME.TXT', InputVariableName, fmt='%FORMAT_STRING')
+\end{lstlisting}
+
+Here, it is important to mention \textbf{formatting strings}. These follow the conventions from the C programming language. I will just introduce my most-used subset of them here.
+
+Formatting strings contain a character. This determines how the incoming value is treated, but all output is as a string:
+\begin{itemize}
+ \item \lstinline{d}: integer
+ \item \lstinline{f}: floating point (``float'')
+ \item \lstinline{s}: string
+\end{itemize}
+
+These are then modified by numbers placed in front of the digits. Both the formatting string and the value that one would like to format as such must be preceded by a \lstinline{%}, and the formatting string must be inside quotes to denote that it is a string. I will explain through a set of examples:
+
+\lstinputlisting{code/FilesData/formattingStrings.py}
+
+\begin{framed}
+\noindent\textbf{Saving multiple files with a numbering scheme}
+
+In many cases, you may have data that belong in a particular order---whether they are a set of time-steps, a series of different analyses, or a number of different sample ID's that you want to automatically generate. For the case with real dates and times, you may use that date and time as part of the file name. And if you use it as \textbf{yyyymmdd}, it will alphabetically sort correctly! This becomes harder though if it is an arbitrary time step -- like say, millions of years ago, seconds, or just an arbitrary set of \textbf{[0, 1, 2, ..., 51, etc.]}. If you want the data to be sorted in order when you do a simple alphabetical sorting -- great for viewing in file browsers, loading into data analyses, or just for general orderly storage, you can run into the problem in which your data show up as \textbf{[0, 1, 10, 100, 2, ..., 51, etc.]}. This is certainly not what we want? So how do we fix it?
+
+We use \textbf{zero-padding} (see code above on string formatting). So in our above example, if we can safely say that all the numbers are integers, and nothing will go over 9999, we can write an output file name as:
+
+\lstinline{fnpadded = 'some_descriptive_text_' + '%04d' %time_step + '.ext'}
+
+And then you can use this to save text output as a floating point with 2 decimal places of precision, called for example \lstinline{plate_reconstruction}, as follows:
+
+\lstinline{np.savetxt(fnpadded, plate_reconstruction, fmt='%.2f')}
+
+\end{framed}
+
+Sometimes, ASCII data are not so easy to work with. This can happen when they are not in a simpe grid. In that case, we have to use lower-level Python commands. To learn basic file handling, you may see the help at \url{http://www.pythonforbeginners.com/files/reading-and-writing-files-in-python}.
+
+One example of this sort of data is a set of GPS tracks provided by Ben P. These look something like:
+\todo{Finish this section}
 
 \section{Binary}
 
-Straight binary
+\subsection{Theory -- and how to get the most out of storage space}
+
+Binary data are represented as a set of ones and zeros. In the Introductory notes, you learned how binary works, and a bit about how numbers may be generated.
+
+Binary data are usually more compact than ASCII data, especially if used correctly. For example, a number between 0 and 65535 may be represented by two bytes (16 bits); this can be seen in binary because $2^16 = 65536$, and we want to include 0, so have to shift the maximum value down one. This is called a 16-bit unsigned integer, because it has 16 bits of data, and does not include a + or - sign (and hence is always positive). A number like this would require 5 bytes in ASCII to represent.
+
+If you are representing a large number of binary values (0 or 1) as 16-bit unsigned integers, you would be using 2 bytes of data per value, while ASCII would require only 1 byte. So in this case, ASCII would be better! But this is where it becomes important to \textit{intelligentlly choose binary representations of data}. If we represented each of these values as binary logical values, each would only require 1 bit of storage space---an 8$\times$ improvement over ASCII and a 16$\times$ improvement over the 16-bit unsigned integer, which is really just too much storage space for binary data.
+
+We often denote these values as follows:
+\begin{itemize}
+ \item unsigned integer: \lstinline{uint}
+ \item signed integer (so can be $+$ or $-$): \lstinline{int}
+ \item floating point: \lstinline{float}
+\end{itemize}
+
+You might also see terms like  \lstinline{single}, \lstinline{double}, \lstinline{char}, \lstinline{word}, etc.; these are less-descriptive terms that also relate to number of bytes in data. I use the three above to be more clear to those who have not memorized what all of these are.
+
+These can also be used to denote how many bits are involved in each data type. For example:
+\begin{itemize}
+ \item unsigned 16-bit integer: \lstinline{uint16}
+ \item signed 32-bit integer (so can be $+$ or $-$): \lstinline{int32}
+ \item 64-bit floating point: \lstinline{float64}
+\end{itemize}
+
+\subsection{Practice -- raw binary files}
+
+\lstinputlisting{code/FilesData/BinaryIO.py}
+
+As a quick mental exercise, imagine that you have the numbers -15, 35, 119, and 43. What is the ideal number of bits with which to represent each number? How about 0, 50612, 151, 10512, 85, 3160? \textit{Answers: 8 bits (int8), 16 bits (uint16).}
+
+\subsection{Binary containers}
+
+\subsubsection{Numpy files}
+
+Standard binary data formats are all right. But there are formats that can remember rows and columns of data, as well as ``container'' formats that can contain multiple arrays. So let's look at the native ones in numpy first.
+
+\lstinputlisting{code/FilesData/npIO.py}
+
+\subsubsection{Working with NetCDF and HDF files -- in brief!}
+
+\todo{add these later}
 
 NetCDF
 
 HDF
 
+\section{Working with Spreadsheets (Excel or LibreOffice Calc)}
+
+So far, we've discussed all of these data formats that might be a bit more complex -- and these are all important for work with computers and larger data sets.
+
+
+\section{Plotting geospatial data using Basemap}
+
+
+\section{Special Python modules for data sets}
+
+
+\section{Time series and the datetime lilbrary}
 
 \end{document}          
