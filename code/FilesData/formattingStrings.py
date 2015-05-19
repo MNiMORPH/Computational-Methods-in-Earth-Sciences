@@ -1,4 +1,4 @@
-# 
+#! /usr/bin/env python
 
 # Formatting strings
 
@@ -53,20 +53,29 @@ print ""
 # %f
 # Floating point numbers can be formatted as follows
 # [TOTAL NUMBER OF CHARACTERS, INCLUDING DECIMAL].[NUMBER OF DIGITS AFTER DECIMAL POINT]
+# -- OR --
+# .[NUMBER OF DIGITS AFTER THE DECIMAL POINT]
+# (with the number of digits before the decimal point being fit to the number 
+#  that you are formatting as a string)
 
-# If there is not enough precision, it still is truncated
+# If there is not enough precision, it still is truncated. But in the 
+# floating-point case, it is rounded.
 print '%4.1f %14.89 :'
-print ('%4.1f' %14.81)
+print ('%4.1f' %14.89)
 print ""
 # This is the perfect size for this
 print '%5.2f %14.89 :'
-print ('%4.1f' %14.81)
+print ('%5.2f' %14.89)
+print ""
+# This automatically sets the proper space to the left of the decimal point
+print '%.2f %14.89 :'
+print ('%.2f' %14.89)
 print ""
 # Extra space and decimal places
 print '%9.4f %14.81 :'
-print ('%9.4f' %14.81)
+print ('%9.4f' %14.89)
 print ""
 # 0-padding with extra decimal places
 print '%09.4f %14.81 :'
-print ('%09.4f' %14.81)
+print ('%09.4f' %14.89)
 
