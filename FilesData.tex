@@ -71,7 +71,7 @@ Along with the basics of data storage and retrieval, we are going to have to lea
 
 Oftentimes in the geosciences, we want to plot geospatial data. I will show how you can install mapping packages and use GIS tools to do just this. I will also point out and (in some cases) very briefly discuss the Python interfaces to GRASS GIS, Arc GIS, and QGIS, the three leading scientific geospatial platforms. These come with a set of premade tools to make it possible to run very involved analyses in just a few lines of code.
 
-Using some of these tools involves downloading and installing 
+Using some of these tools involves downloading and installing \todo{Modules section}
 
 \section{ASCII}
 
@@ -140,7 +140,27 @@ And then you can use this to save text output as a floating point with 2 decimal
 Sometimes, ASCII data are not so easy to work with. This can happen when they are not in a simpe grid. In that case, we have to use lower-level Python commands. To learn basic file handling, you may see the help at \url{http://www.pythonforbeginners.com/files/reading-and-writing-files-in-python}.
 
 One example of this sort of data is a set of GPS tracks provided by Ben P. These look something like:
-\todo{Finish this section}
+
+\begin{lstlisting}
+0
+728609.215175176 7272865.670114477 3850.1122000000032
+728608.813141581 7272866.856349733 3850.1769000000058
+...
+728588.585519101 7272909.968807690 3851.2842999999993
+END
+1
+729772.085292112 7284330.246414313 3857.9808000000048
+...
+729789.783887492 7284223.112814812 3858.0691999999981
+END
+...
+\end{lstlisting}
+
+The numbers and ``END'' lines separate individual tracks. However, these are not nice 3-column entries. How do we parse a file like this?
+
+Using the more basic Python file read/write commands (see links above), one can input the lines of the file, parse them into lists, and then turn them into arrays. This is as follows:
+
+\lstinputlisting{code/FilesData/readGPStracks.py}
 
 \section{Binary}
 
@@ -199,6 +219,12 @@ So far, we've discussed all of these data formats that might be a bit more compl
 
 
 \section{Special Python modules for data sets}
+
+\begin{framed}
+\textbf{pip and easy\_install}
+\todo{TEXT}
+\end{framed}
+
 
 
 \section{Time series and the datetime lilbrary}
