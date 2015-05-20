@@ -81,5 +81,6 @@ target/
 *.tex.backup
 
 # Linux temp files
+*#
 *~
 *.swp
