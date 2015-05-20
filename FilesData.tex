@@ -210,9 +210,18 @@ Standard binary data formats are all right. But there are formats that can remem
 
 \lstinputlisting{code/FilesData/npIO.py}
 
-\subsubsection{Raster images}
+\subsubsection{Raster data -- a geospatial example}
 
-\todo{add these later}
+Instead of just showing any standard raster data set, I am going to use a GeoTIFF that covers Berlin and the edge of Potsdam. In order to work with this, you are going to have to install the Python GDAL library.
+
+\begin{framed}
+\noindent\textbf{GDAL and OGR}
+GDAL (raster) and OGR (vector) are the key software libraries behind most GIS applications. You can access them directly in Python, in additon to being able to access more general GIS libraries.
+\end{framed}
+
+Installing these libraries can be done with either your package manager (\lstinline{sudo apt-get install python-gdal}), or something like this), or with pip (\lstinline{sudo pip install gdal}). Seriously, do a good Google search about pip and how it works. It is super useful, with tools for remote sensing, dealing with mutliple data types, geological modeling, and of course lots of non-geological work.
+
+\lstinputlisting{code/FilesData/GDAL_DEM.py}
 
 \subsubsection{Working with NetCDF and HDF files -- in brief!}
 
