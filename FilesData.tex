@@ -102,6 +102,14 @@ As mentioned in the introductory section, there is a Matplotlib tutorial at \url
 
 You should have already installed \lstinline{numpy}. This is the numerical Python package and is important for doing work with all sorts of arrays. We are going to start by importing some data from an ASCII text file. In this case, it will be a simple transect of elevations across the park by where I grew up. We will use both the Numpy \lstinline{genfromtxt} feature to create a numpy array and the \lstinline{pandas read_csv} feature to generate a Pandas DataFrame. This example already includes plotting with matplotlib as does a section in the introductory notes. This, I hope, will be fairly self-explanatory.
 
+If you are on Windows or Mac, your Python distribution should have come with Pandas. If you are on Linux (or Mac and are using a package manager) and do not yet have Pandas, you can type \lstinline{sudo apt-get install python-pandas} or a similar command.
+
+\begin{framed}
+\textbf{pip and easy\_install}
+
+\lstinline{pip} and \lstinline{easy_install} are two tools to automatically add new Python packages. These are packages build by the community of Python users. You may need them for some of the packages to work with specific data sets in this guide. Indeed, there are so many useful such packages to do many of the activities that you might want to do that it is often good to do an Internet search for ``python $<$task you want to do$>$ before starting any work.
+\end{framed}
+
 \lstinputlisting{code/FilesData/CSVexample.py}
 
 You can also save ASCII data using the \lstinline{np.savetxt} feature. I mostly use it as follows:
@@ -202,6 +210,10 @@ Standard binary data formats are all right. But there are formats that can remem
 
 \lstinputlisting{code/FilesData/npIO.py}
 
+\subsubsection{Raster images}
+
+\todo{add these later}
+
 \subsubsection{Working with NetCDF and HDF files -- in brief!}
 
 \todo{add these later}
@@ -212,19 +224,23 @@ HDF
 
 \section{Working with Spreadsheets (Excel or LibreOffice Calc)}
 
-So far, we've discussed all of these data formats that might be a bit more complex -- and these are all important for work with computers and larger data sets.
+So far, we've discussed all of these data formats that might be a bit more complex -- and these are all important for work with computers and larger data sets. However, many of us in the Earth sciences deal with spreadsheet data. Up until now, most (all?) of you have worked only by hand with this data. But no longer!
 
+There many packages to work with spreadsheets. I will show you only the builtin method with Pandas here, but you should know about at least the two following ones (available via \lstinline{pip}):
+\begin{itemize}
+ \item openpyxl (Excel)
+ \item odfpy (LibreOffice)
+ \item oosheet (LibreOffice calc -- a spreadsheet-focused alternative to odfpy)
+\end{itemize}
+
+Here, we are going to plot an oxygen isotope history from a Greenland ice core:
+
+\lstinputlisting{code/FilesData/GreenlandXLSXpandas.py}
 
 \section{Plotting geospatial data using Basemap}
 
 
 \section{Special Python modules for data sets}
-
-\begin{framed}
-\textbf{pip and easy\_install}
-\todo{TEXT}
-\end{framed}
-
 
 
 \section{Time series and the datetime lilbrary}
