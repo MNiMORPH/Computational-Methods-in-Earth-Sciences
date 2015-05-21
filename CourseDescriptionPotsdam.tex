@@ -9,17 +9,23 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
+%\usepackage{titling}
+%\setlength{\droptitle}{-3.5cm}
+
 \title{Computational Methods in Earth Sciences}
-\author{Andrew Wickert, PhD (\url{andrew.wickert@uni-potsdam.de})\\
+\author{Andrew Wickert, PhD\\
+	{andrew.wickert@uni-potsdam.de}\\
         \\
         Universit\"{a}t Potsdam Summer Semester, 2015\\
         Last updated \today}
-%\thanks{Universit\"{a}t Potsdam\\ \indent Summer Semester, 2015}
-%\date{\today}
+\thanks{Universit\"{a}t Potsdam\\ \indent Summer Semester, 2015}
+\date{\today}
 \lhead{}
 \rhead{Computational Methods in Earth Sciences (Last revised \today)}
 
 \begin{document}
+
+\vspace{-10cm}
 
 \maketitle
 
@@ -27,6 +33,7 @@
 
 The objective of this course is to introduce students to a range of ways in which computers can help them analyze and process data, translate ideas and conceptual models into computer simulations, visualize their findings, and work alone or in teams to address research questions. Students will be introduced to the Python programming language, which is easy to learn and used broadly across the geosciences. They will work with real data sets and write models to understand systems that are of relevance to their research.
 
+%\begin{comment}
 \section{Required materials}
 \begin{itemize}
  \item Bring a laptop computer to class; please email the instructor if this is a problem
@@ -89,6 +96,8 @@ Students taking the course for a grade will be evaluated on the basis of their c
 
 \section{Schedule}
 
+\noindent\emph{\textbf{Important Note:} Due to the instructor's travel schedule, we are having only six class meetings. These will be very dense classes, and you are expected to need to take approximately the same amount of time as the class on your own to properly learn. The course notes are long and full of examples (code provided), links to online resources, and information on both the theory and practice of programming; these along with your textbook should be good resources for additional study. Please do not hesitate to send an email if anything in the course notes is unclear or does not work as expected; this is the first time that the class has been taught, so it is qutie possible that something will need to be fixed!}\\
+
 \begin{minipage}{\linewidth} 
 \noindent \textbf{06 May, 14:00--17:00: Haus 27, Raum 2.36}\\
 \textit{Programming: philosophy, problem-solving, and basic volcabulary}\\
@@ -121,73 +130,78 @@ Reading: Chapters 1--2
  \item Functions
  \item Classes and object-oriented programming
  \item Using a pre-built module: Matplotlib for plotting
- \item Exercise: Writing your own class for a block of rock/soil
+% \item Exercise: Writing your own class for a block of rock/soil
 \end{itemize}
 \vspace{12pt}
 \end{minipage}
 
 \begin{minipage}{\linewidth}
-\noindent \textbf{13 May?, 8:15AM--12PM?}\\
-\textit{Mathematical methods review; doing math in Python}
-\begin{itemize}
- \item \textbf{Before class:} (Maybe) math review worksheet
- \item Derivatives and differential operators
- \item Integrals and numerical methods for integration
- \item Vectors, matrices, and arrays
- \item Dot products, cross products
- \item Forward difference discretization of differential equations
- \item Exercise: array and matrix operations: solving heat transport through your soil block from the week before
-\end{itemize}
-\vspace{12pt}
-\end{minipage}
-
-{
-\begin{minipage}{\linewidth}
-\noindent \textbf{22 May, 8:15AM--12PM}\\
+\noindent \textbf{22 May, 09:05--12:00: Haus 25, Raum D2.01}\\
 \textit{Working with data}
 \begin{itemize}
  \item \textbf{Before class:} Bring a set of data you want to analyze; email the instructor to ensure that your data format will be covered
  \item Text files
  \item Spreadsheets
  \item Binary files
- \item NetCDF files
+ \item NetCDF and HDF files
  \item Geospatial data (if we get this far)
- \item Exercise: using what we have learned for each of your data sets
+ \item Plotting data
 \end{itemize}
 \vspace{12pt}
 \end{minipage}
-}
 
 \begin{minipage}{\linewidth}
-\noindent \textbf{02, 03, 09 or 10 June?, 8:15AM--12PM?}\\
-\textit{Probability theory; integrating data sets and models}
+\noindent \textbf{01, 02, 09 or 10 June -- Doodle Poll, 09:15 to 12:00, room ???}\\
+\textit{Math review; introduction to modeling; probability theory}
+\begin{enumerate}
+\item Andy Wickert's lecture
 \begin{itemize}
- \item Basic lecture: Modeling and finite difference methods Part 1
- \item \textbf{Guest lecture:} Crystal Ng: Probability in the geosciences
+ \item \textbf{Before class:} Math review worksheet
+ \item Derivatives and differential operators
+ \item Integrals and numerical methods for integration
+ \item Vectors, matrices, and arrays
+ \item Dot products, cross products, matrix multiplication
+ \item Vector notation and Einstein (summation) notation
+\end{itemize}
+%\item \textbf{Brief break}
+\item \textbf{Guest lecture:} Prof. Dr. Crystal Ng
+\begin{itemize}
+ \item Probability in the geosciences
+ \item Integrating data sets and models
  \item Modeling hillslope evolution
 \end{itemize}
+\end{enumerate}
 \vspace{12pt}
 \end{minipage}
 
 \begin{minipage}{\linewidth}
-\noindent \textbf{12 June}\\
-\textit{Finite Difference Methods -- the better way}
+\noindent \textbf{12 June, 09:05--12:00: Haus 25, Raum D2.01}\\
+\textit{Modeling and finite difference methods}
+\begin{itemize}
+ \item Discretization with a geometric argument (out minus in)
+ \item Discretization with Taylor Series
+ \item Discussion of orders of numerical precision
+ \item Forward difference (central difference) discretization of differential equations: thermal diffusion example
+ \item Implicit solutions: implicit-in-space solution for the diffusion equation (Crank--Nicolson solutions are implicit in time as well, but I do not think we will have time to cover these)
+ \begin{enumerate}
+  \item Building matrix solutions
+  \item Solving a $n$-diagonal system of equations
+ \end{enumerate}
+\end{itemize}
 \vspace{12pt}
 \end{minipage}
 
 \begin{minipage}{\linewidth}
-\noindent \textbf{19 June}\\
-\textit{Final projects -- start of work}
+\noindent \textbf{19 June, 09:05--12:00: Haus 25, Raum D2.01}\\
+\textit{Final projects -- start of work}\\
+This is really your day to discuss your final projects with the instructor and to make plans for how to move forward with them. These final projects are \textbf{Required for all students who are taking the coures for credit}, and should ideally include some component of your research (this is for your sake -- so it is useful to you!)
 \vspace{12pt}
 \end{minipage}
 
 \noindent\emph{***INSTRUCTOR IN THE FIELD IN ARGENTINA 23 JUNE -- 30 JULY; WILL DO HIS BEST TO ANSWER EMAILS RELATED TO FINAL PROJECTS. SO GET STARTED REALLY EARLY!***}\\
 
-\begin{minipage}{\linewidth}
-\noindent \textbf{If time allows -- otherwise those seeking credit will just submit via email}\\
-\textit{Final projects -- presentations}
-\vspace{12pt}
-\end{minipage}
-%\end{comment}
+\noindent\emph{Please submit your final projects via GitHub and/or email. (Required only for those seeking credit; others of course are welcome to receive feedback)}\\
+
+\noindent\textbf{First week of August: those of you who need a Prüfungsausschuss} must meet with the instructor to discuss your final projects and to obtain a signed Prüfungsausschuss. These will be turned in to Apl. Prof. Dr. Martin Trauth (see \url{http://www.geo.uni-potsdam.de/pruefungsausschuss-1323.html} for more information). Please email Andrew Wickert (\url{andrew.wickert@uni-potsdam.de}) about this at your earliest convenience. The instructor is moving to the USA after the first week of August, so promptness is in your own best interests!
 
 \end{document}
