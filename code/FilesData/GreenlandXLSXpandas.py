@@ -20,8 +20,11 @@ plt.ylabel(data.columns[-1], fontsize=16)
 plt.show()
 
 # If we want better axis labels, we can use the LaTeX formatting:
+plt.figure(figsize=(12,5)) # make figure extra-wide (width, height)
 plt.plot(data['years [b2k]'], data['del18O [permil]'])
-plt.title('Renland', fontsize=16, fontweight='bold')
+plt.title('Greenland Ice Core: Renland', fontsize=16, fontweight='bold')
 plt.xlabel('Years b2k', fontsize=16)
+# Below, I use LaTeX formatting to write the Greek "delta" and the superscript
 plt.ylabel('$\delta^{18}$O', fontsize=16)
+plt.tight_layout()
 plt.show()

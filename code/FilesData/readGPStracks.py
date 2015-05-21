@@ -83,10 +83,42 @@ alltracks = np.concatenate(tracks)
 
 # And let's see if there is any statistical clustering of elevations
 plt.hist(alltracks[:,-1], bins=100)
-plt.title('GPS tracks')
+plt.title('GPS track hypsometry', fontsize=20, fontweight='bold')
 plt.ylabel('Number of measurements', fontsize=20)
 plt.xlabel('Elevation [m]', fontsize=20)
 plt.tight_layout() # Formatting helper
 plt.show()
 # Yep, there are some distinct hypsometric peaks!
+# But look at the x-axis and how crowded those labels are. We'll fix that
+# in the next plot.
+
+# Now, let's get some practice plotting both together:
+plt.figure(figsize=(14,6)) # Wide figure
+# 1 row, 2 columns, panel 1
+ax1 = plt.subplot(121)
+for line in tracks:
+  ax1.plot(line[:,0], line[:,1]) # Easting, Northing
+# You have to set the axis object properties here
+ax1.set_title('GPS tracks', fontsize=20, fontweight='bold')
+# Rotate x-ticks
+# Can also use strings like "vertical"
+# And can use plt.xticks (or plt.yticks) to set many other tick-related
+# parameters.
+# See, for a straightforward example:
+# http://matplotlib.org/examples/ticks_and_spines/ticklabels_demo_rotation.html
+plt.xticks(rotation=60) # use of "plt" explained below for ax2
+ax1.set_ylabel('Northing', fontsize=20)
+ax1.set_xlabel('Easting', fontsize=20)
+# 1 row, 2 columns, panel 2
+ax2 = plt.subplot(122)
+ax2.hist(alltracks[:,-1], bins=100)
+# Check this out -- "plt" applies to the currently-selected axis. So it works 
+# here just as well as "ax2."
+plt.title('GPS track hypsometry', fontsize=20, fontweight='bold')
+plt.xticks(rotation=60)
+ax2.set_ylabel('Number of measurements', fontsize=20)
+ax2.set_xlabel('Elevation [m]', fontsize=20)
+# Now autoformat a nice layout and show the figure
+plt.tight_layout() # Formatting helper
+plt.show()
 

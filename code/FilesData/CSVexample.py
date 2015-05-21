@@ -10,7 +10,7 @@ data = np.genfromtxt('../../data/BattleCreekProfile.txt', skip_header=1, \
                       delimiter=',')
 
 # Plot as distance profile
-plt.plot(data[:,0], data[:,1], 'k', linewidth=2)
+plt.plot(data[:,0]/1000., data[:,1], 'k', linewidth=2)
 plt.xlabel('Distance [km]')
 plt.ylabel('Elevation [m]')
 plt.title('NUMPY!')
@@ -23,7 +23,7 @@ import pandas as pd
 data = pd.read_csv('../../data/BattleCreekProfile.txt')
 
 # Plot -- hey look, distance is inferred!
-plt.plot(data['Elevation (m)'], 'k', linewidth=2)
+plt.plot(data['Distance (m)']/1000., data['Elevation (m)'], 'k', linewidth=2)
 plt.xlabel('Distance [km]')
 plt.ylabel('Elevation [m]')
 plt.title('PANDAS!')
