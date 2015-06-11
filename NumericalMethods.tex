@@ -2,18 +2,22 @@
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures ?--?: Numerical Methods}
+\title{Lectures ?--?: Computer Modeling and Finite Difference Methods}
 \author{Andrew D. Wickert}
 \date{Last updated \today}
 
 \usepackage{listings}
-\usepackage{color}
-%\usepackage{url}
-\usepackage[colorlinks=true]{hyperref}
+\usepackage{framed}
 
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\lstset{mathescape,basicstyle=\ttfamily} % Allow escaping to LaTeX inside $..$
+
+\usepackage{color}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[T1]{fontenc}
 
 \newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}} 
  
@@ -54,7 +58,100 @@
 \begin{document}
 \maketitle
 
+\section{Philosophy of Computer Modeling}
+
+Before starting to write a program to solve a problem, one must ask oneself important questions such as,
+\begin{itemize}
+ \item Why do I want to model this system?
+ \begin{itemize}
+  \item To test relationships between variables and gain some new physical insight that would be difficult to attain with reasoning or analytical solutions alone?
+  \item To accurately represent a real physical system, including efforts to try to match data and their associated uncertainties?
+  \item To make a prediction of the future and/or past?
+  \item Other?
+ \end{itemize}
+ \item What is the best way to model it?
+ \begin{itemize}
+  \item As a set of continuum equations?
+  \item As a number of individual agents that take actions in their virtual environment?
+  \item With full-realism physics or simplified rules?
+  \item Other?
+ \end{itemize}
+ \item Should I wish to, how do I compare the ``real world'' and the data? Or perhaps improve the fit between data and model?
+\end{itemize}
+
+\begin{framed}
+\noindent\textbf{The first algorithm}
+
+The first computer program was written in 1843 (or maybe 1842) by Lady Ada Lovelace, with a numerical method to calculate the Bernoulli Numbers. She was 28!
+\end{framed}
+
 \section{Mathematics Review}
+
+\subsection{Vectors}
+
+A vector is a one-dimensional matrix. It is thus a special case of the more general class of matrices. It may be a row,
+\begin{equation}
+\vec{a} =
+ \begin{pmatrix}
+  a_{1} & a_{2} & \cdots & a_{n} \\
+ \end{pmatrix},
+\end{equation}
+or a column,
+\begin{equation}
+\vec{a} =
+ \begin{pmatrix}
+  a_{1} \\
+  a_{2} \\
+  \vdots \\
+  a_{m}
+ \end{pmatrix}.
+\end{equation}
+
+Vectors can define a direction. For example, in three dimensions:
+\begin{equation}
+\vec{r} =
+ \begin{pmatrix}
+  x \\
+  y \\
+  z
+ \end{pmatrix}.
+\end{equation}
+
+\subsection{Two-dimensional matrices}
+
+
+
+\subsection{Matrix equations}
+
+
+
+\subsubsection{Dot products}
+
+
+
+\subsubsection{Cross products}
+
+
+
+\subsubsection{Matrix multiplication}
+
+
+
+
+\subsubsection{Notation}
+
+
+
+\subsection{Operators}
+
+
+
+
+Einstein notation
+
+\subsubsection{}
+
+
 
 \subsection{Derivatives}
 
@@ -102,7 +199,6 @@ An indefinite integral
 \caption{An integral is the sum of all area under a curve. (Contributed to Wikimedia Commons by User:KSmrq)}
 \end{figure}
 
-
 \subsection{Taylor series}
 
 The Taylor series of any complex function $f(x)$ (i.e., $f(x) \in \mathbb{C}$) that is infinitely differentiable at a point $x_0$ approximates that function as a power series:
@@ -122,26 +218,51 @@ where $n$ is the number of the derivative of $f$.
 \caption{Increasing orders of the derivative $n$, denoted P$n$, where $n = 1, 2, 3, \cdots$, show the increasing approximation of a sum of polynomials to the sine function.}
 \end{figure}
 
-
-
-dot products
-
-cross products
-
-vectors
-
-tensors
-
-
-Meshes
-
 \section{Finite difference}
+
+One of the most useful functions of computers is their ability to approximate the values of derivatives at points. This allow us to directly compute approximations of the values of derivatives in differential equations and therefore solve them, typically through space and/or time.
+
+You may have wondered why I covered derivatives and Taylor series right after one another. This is because these provide two ways to generate finite difference solutions to differential equations. The definition of a derivative provides a way to think of a derivative as the linear tangent to a curve at a given point -- and hence, also, to be well-approximated by a straight line over a finite distance so long as that distance is small compared to the nonlinearity of the curve that it is approximating. The Taylor series provides a less-visual but more powerful way to consider higher-order equations that could fit a curve near a certain point.
+
+The result of this section will be a formalilzation of the \textbf{finite difference method}, by which a set of differential equations is estimated on a grid with constant spacings between grid cells (hence finite difference) and then solved. To provide a bit more background, finite difference is just one of several major methods for modeling with continuum equations. Other methods are finite volume (similar to finite difference except considering full cell volume, finite element (which allows a more irregular grid) and spectral (using how something varies in terms of periodic functions in order to write solutions to equations). Agent-based models that follow the actions of individual ``agets'' in a computational space also exist. These agents are often given simple rules and then allowed to interact with one another.
+
+\subsection{Thermal diffusion}
+
+In the example given here, we will solve the diffusion equation. First, I will present a derivation.
+
+Heat is conducted at a rate that is proportional to the:
+\begin{itemize}
+ \item \textbf{Temperature difference (directly proportional)}: hotter things more quickly make other things hotter and colder things more quickly make other things colder. The contents of a bottle placed in the freezer will become cold more quickly than will those of one placed in the refrigerator
+ \item \textbf{Distance along which heat must be conducted (inversely proportional)}: if there is a thicker wall to a thermos, cooler, or refrigerator, it will better insulate the heat
+\end{itemize}
+The constant of proportionality, $k$, is called the ``thermal conductivity'' and tells one how easily heat is conducted through a medium. It is an analog to electrical conductivity.
+
+Putting all of these together, we can write (in one dimension):
+\begin{equation}
+ q_x = k \frac{d T}{d x}
+\end{equation}
+Here, $q_x$ is the heat flux (units of Watts per meter squared [W m$^{-2}$]).
+
+This can be paired with an expression that relates heat flux to change in temperature. As one might expect, temperature increases with heat flux in and decreases with heat flux out. So it is the negative spatial derivative of heat flux that provides the negative divergence (i.e. convergence) of heat at the point of interest. Assuming no phase changes (e.g., solid to liquid), this occurrs at a rate that is inversely proportional to the heat capacity of the material. This is given by the specific heat capacity, here given assuming constant pressure ($c_p$), times the density ($\rho$). Given again in one dimension:
+\begin{equation}
+ \frac{\partial T}{\partial t} = -\frac{1}{c_p \rho} \frac{\partial q_x}{\partial dx}
+\end{equation}
+
+Putting these two equations together yields the \emph{diffusion equation}, one of the most widely-used equations in science.
+\begin{equation}
+ \frac{\partial T}{\partial t} = -\frac{k}{c_p \rho} \frac{\partial^2 q_x}{\partial dx^2}
+\end{equation}
+Redefining the coefficients on the right-hand side of the equation as $\kappa$ yields:
+\begin{equation}
+ \frac{\partial T}{\partial t} = -\kappa \frac{\partial^2 q_x}{\partial dx^2}
+\end{equation}
+This can be used to model chemical fluxes, temperature fluxes, hillslope change, and many more processes.
 
 \subsection{Discretization}
 
-You may have wondered why I covered derivatives and Taylor series right after one another
 
-Finite difference, finite element, and spectral
+
+
 
 Forward difference and ``implicit''
 on both structured and unstructured meshes
