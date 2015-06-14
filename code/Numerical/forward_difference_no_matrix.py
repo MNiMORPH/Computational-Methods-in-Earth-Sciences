@@ -4,7 +4,7 @@ from scipy.sparse.linalg import spsolve, isolve
 from matplotlib import pyplot as plt
 
 # Time
-dt = 50 # [s]
+dt = 200 # [s]
 Tend = 10000 # [s]
 
 # Grid

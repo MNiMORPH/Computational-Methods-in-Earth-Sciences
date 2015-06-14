@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.sparse import spdiags
+from scipy.sparse import spdiags, identity
 from scipy.sparse.linalg import spsolve, isolve
 from matplotlib import pyplot as plt
 

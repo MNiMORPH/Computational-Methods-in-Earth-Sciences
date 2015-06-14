@@ -4,12 +4,13 @@ from scipy.sparse.linalg import spsolve, isolve
 from matplotlib import pyplot as plt
 
 # Time
-dt = 50 # [s]
-Tend = 10000 # [s]
+dt = 500 # [s]
+Tend = 1000 # [s]
 
 # Grid
 Tstart = np.zeros(100)
 T = Tstart.copy()
+T[50] = 150.
 dx = 0.01 # [m]
 x = np.arange(0, len(Tstart)*dx, dx)
 
@@ -18,7 +19,7 @@ kappa = 1E-6 # Thermal diffusivity [m**2 / s]
 
 # Boundary conditions -- Dirichlet
 bcl = np.array([50]) # Jumps up to 50 degrees at t=0
-bcr = np.array([0])  # Stays at 0.
+bcr = np.array([100])  # Stays at 0.
 
 # Put boundary conditions into the RHS "a" array
 a = np.hstack(( bcl, np.zeros(len(T)-2), bcr ))
