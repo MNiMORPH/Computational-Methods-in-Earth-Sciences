@@ -1,0 +1,341 @@
+% This syllabus template was created by:
+% Brian R. Hall
+% Assistant Professor, Champlain College
+% www.brianrhall.net
+
+% Document settings
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[pdftex]{graphicx}
+%\usepackage{multirow}
+%\usepackage{setspace}
+\usepackage{url}
+\usepackage{comment}
+%\pagestyle{plain}
+%\setlength\parindent{0pt}
+\usepackage{tabularx}
+\usepackage{enumitem}
+%\setitemize[0]{labelwidth=50pt}
+\usepackage{longtable}
+
+\newcommand{\todo}[1]{\textcolor{red}{@TODO: #1}}
+
+
+
+\begin{document}
+
+% Course information
+\noindent\begin{tabular}{ l }
+  \bf
+  %\multirow{3}{*}{\includegraphics[height=1.25in,width=1in]{logo_blank.png}} 
+  \noindent\LARGE \textbf{ESCI 5980: Computational Methods in Earth Science} \\\\
+  \noindent\large Class meetings: MW 4--5:15 in Pillsbury Hall 209 \\
+\end{tabular}
+\vspace{20pt}
+
+% Professor information
+\begin{tabular}{ l }
+  %\multirow{5}{*}{\includegraphics[height=1.25in,width=1in]{pic_blank.png}}
+  \large \textbf{Instructor} \\
+  \large Andrew Wickert \\
+  \large awickert@umn.edu \\
+  \large 2D Pillsbury Hall \\
+  \large Office Hours: TBD \\
+  \large (612) 625-6878 \\
+\end{tabular} \\
+\hphantom{12} \\
+
+\begin{center}
+\textit{This syllabus is subject to change based on the rate of progress of the class.}
+\end{center}
+
+% Course details
+\noindent\textbf {\large \\ Course Description:} Introduction to Python programming. Data reading, writing, analysis, processing, and visualization. Model development and finite difference methods. Final project of students’ choice that integrates skills gained during the course. \\
+\noindent\textbf{Prerequisite(s):} Calculus recommended.
+
+%\textbf {Note(s):} A minimum grade of C is required in this course to progress to COURSE. 
+
+\noindent\textbf {Credit Hours:} 3\\
+
+\noindent\textbf {\large Text(s):}
+
+\begin{itemize}
+\item \noindent \emph{Think Python: How to Think Like a Computer Scientist}: PDF and HTML available at \url{http://www.greenteapress.com/thinkpython/}
+\end{itemize}
+
+
+\begin{comment}
+\textbf {\large Course Objectives:} \\
+At the completion of this course, students will be able to:
+\begin{enumerate} \itemsep-0.4em
+  \item O
+  \item B
+  \item J
+  \item E
+  \item C
+  \item T
+  \item I
+  \item V
+  \item E
+  \item S
+\end{enumerate}
+\end{comment}
+
+% I recommend using \newpage here if necessary
+\noindent\textbf {\large Grade Distribution:} \\
+\hspace*{40mm}
+\begin{tabular}{ l l }
+Mid-term projects and exercises & 55\% \\
+Final project & 40\% \\
+Class participation and teamwork & 5\%
+\end{tabular} \\\\
+Note that this grade distribution \emph{may change slightly} if the distribution of effort in different parts of the course changes from what I expect.
+
+\noindent\textbf{\large Assignments:}\\
+Unless otherwise notified, all assignments will be due \textbf{one week} from the date on which they are assigned. If this date falls on a weekend, then they are due the first weekday after one week passes. After one week, late work will be worth half credit. This is necessary to ensure that I am able to return assignments to students in a timely manner, and to ensure that you keep up with course material. Of course, reasonable exceptions to these penalties and deadlines will be accepted (e.g., family or medical emergency), with arrangements for late work designed to accommodate these real-life events without causing undue stress (see below). Late or missed work due to reasons that the students knew about beforehand will not be accepted unless arrangements are made before the assignment is due; the definition of ``beforehand'' can be stretched for some circumstances (found out you broke your leg shortly before class) and not in others (scheduled absence due to a normal event). In general, I will accept most reasonable requests for extra time on assignments, provided the request is made at least 24 hours before the assignment is due, but reserve the right to use my judgment.
+
+\noindent\textbf{\large Readings:}\\
+Readings in the textbook will supplement your learning in class, but there will not be a 1:1 overlap between readings and lectures. Sometimes they will be close to one another, and sometimes they will diverge but be complementary. \\
+
+
+
+%\textbf {\large Letter Grade Distribution:} \\\\
+%\hspace*{40mm}
+%\begin{tabular}{ l l | l l }
+%\textgreater= 93.00 & A & 73.00 - 76.99 & C \\
+%90.00 - 92.99 & A-  & 70.00 - 72.99 & C- \\
+%87.00 - 89.99 & B+  & 67.00 - 69.99 & D+ \\
+%83.00 - 86.99 & B  & 63.00 - 66.99 & D \\
+%80.00 - 82.99 & B-  & 60.00 - 62.99 & D- \\
+%77.00 - 79.99 & C+  & \textless= 59.99 & F \\
+%\end{tabular} \\
+
+% Course Outline
+%\newpage
+
+\noindent\textbf {\Large Course Schedule}:
+
+%This syllabus is subject to change: it depends on the progress of the class, and how the class evolves through the semester. As this is the first time that this geomorphology class will be taught (or that any will have been taught at UMN in $\sim$10 years), a common-sense approach to altering assignments and lecture topics will be taken. Furthermore, field trips are subject to conditions in nature, so factors outside of our control may cause these to be rescheduled.
+
+\begin{longtable}[th!]{|p{.75in}|p{5.75in}|}
+%\normalsize % The size of the table text can be changed depending on content. Remove if desired.
+%\begin{tabular}{|p{1in}|p{5.5in}|}
+\hline
+\textbf{Week} & \textbf{Content} \\
+\hline
+\noindent Weeks 1--4 & \begin{minipage}{.85\textwidth}
+%\begin{enumerate}%[leftmargin=2cm, nosep]
+	\begin{minipage}{4.9in}
+	\vspace{1mm}
+	Introduction to Python programming and general programming concepts and implementation
+	\begin{itemize} \itemsep0em 
+	\item Commands in Python
+	\item Imperative and object-oriented programming
+	\item Software architecture and (re)usability
+	\end{itemize}
+	\vspace{1mm}
+	\end{minipage}
+%\end{enumerate}
+\end{minipage} \\
+\hline
+\noindent Weeks 5--8 & \begin{minipage}{.85\textwidth}
+%\begin{enumerate}[leftmargin=2cm, nosep]
+	\begin{minipage}{4.9in}
+	\vspace{1mm}
+	Data sets
+	\begin{itemize} \itemsep0em 
+	  \item Familiarity with a range of data formats common across Earth, atmospheric, and oceanic sciences
+	  \begin{itemize} \itemsep0em 
+	    \item Text files (ASCII)
+	    \item binary data files
+	    \item Spreadsheets
+	    \item NetCDF
+	    \item GIS data (raster and vector)
+	    \item Remotely sensed data products
+	    \item Government-collected data sets in standard formats (e.g., stream gauge data)
+	  \end{itemize}
+	  \item Data analysis
+	  \begin{itemize} \itemsep0em 
+	    \item Remotely-sensed imagery to data products (e.g., NDVI, surface temperature)
+	    \item Interpolation
+	    \item Time-series and spectral analysis
+	    \item Building automated tools to analyze well-formatted input data
+	  \end{itemize}
+	  \item Data visualization
+	  \begin{itemize} \itemsep0em 
+	    \item Plotting tools (Matplotlib)
+	    \item Specialized visualizers (e.g., Paraview, Panoply)
+	    \item Map projection and plotting tools (e.g., Cartopy)
+	  \end{itemize}
+	  \item GIS applications, as time allows
+	\end{itemize}
+	\vspace{1mm}
+	\end{minipage}
+%\end{enumerate}
+\end{minipage} \\
+\hline
+\noindent Weeks 9--12 & \begin{minipage}{.85\textwidth}
+%\begin{enumerate}[leftmargin=2cm, nosep]
+	\begin{minipage}{4.9in}
+	\vspace{1mm}
+	Models
+	\begin{itemize} \itemsep0em 
+	  \item Introduction to types of numerical models
+	  \item Differential equations review/preview: simple analytical solutions, Taylor series approximations, and numerical solutions
+	  \item Matrix algebra to solve systems of differential equations: applying the finite difference method
+	  \begin{itemize} \itemsep0em 
+	    \item Discretizing equations
+	    \item Numerical stability, numerical diffusion
+	    \item Basic Euler forward
+	    \item Banded matrix methods to solve equations
+	    \item Sparsity, memory management
+	    \item Implicit solution methods
+	  \end{itemize}
+	\end{itemize}
+	\vspace{1mm}
+	\end{minipage}
+%\end{enumerate}
+\end{minipage} \\
+\hline
+\noindent Weeks 13-- & \begin{minipage}{.85\textwidth}
+%\begin{enumerate}[leftmargin=2cm, nosep]
+	\begin{minipage}{4.9in}
+	\vspace{1mm}
+	Final projects
+	\begin{itemize} \itemsep0em 
+	  \item Build software that will assist you in a topic of your choosing (ideally related to your research)
+	  \item Learn how to use version-control software and appropriate licensing for collaborative work
+	  \item Integration of data and models is encouraged
+	  \item Present results at the end of the semester
+	\end{itemize}
+	\vspace{1mm}
+	\end{minipage}
+%\end{enumerate}
+\end{minipage} \\
+\hline
+%\end{tabular} 
+\end{longtable}
+
+%\newpage
+
+% College Policies
+\vspace{24pt}
+\noindent\textbf{\Large University of Minnesota Course Policies}
+
+\noindent\textbf{(Including small modifications for this class)}
+
+\vspace{10pt}
+\noindent\textbf{Student Conduct Code}
+
+\hspace{3mm}
+The University seeks an environment that promotes academic achievement and integrity, that is protective of free inquiry, and that serves the educational mission of the University. Similarly, the University seeks a community that is free from violence, threats, and intimidation; that is respectful of the rights, opportunities, and welfare of students, faculty, staff, and guests of the University; and that does not threaten the physical or mental health or safety of members of the University community.
+
+As a student at the University you are expected adhere to Board of Regents Policy: Student Conduct Code. To review the Student Conduct Code, please see \url{http://regents.umn.edu/sites/regents.umn.edu/files/policies/Student_Conduct_Code.pdf}.
+
+Note that the conduct code specifically addresses disruptive classroom conduct, which means "engaging in behavior that substantially or repeatedly interrupts either the instructor's ability to teach or student learning. The classroom extends to any setting where a student is engaged in work toward academic credit or satisfaction of program-based requirements or related activities."
+
+
+\vspace{10pt}
+\noindent\textbf{Use of Personal Electronic Devices in the Classroom}
+
+\hspace{3mm}
+We will be using computers in the class, and you are expected to use them for course work.
+
+\vspace{10pt}
+\noindent\textbf{Scholastic Dishonesty}
+
+\hspace{3mm}
+You are expected to do your own academic work and cite sources as necessary. Failing to do so is scholastic dishonesty. Scholastic dishonesty means plagiarizing; cheating on assignments or examinations; engaging in unauthorized collaboration on academic work; taking, acquiring, or using test materials without faculty permission; submitting false or incomplete records of academic achievement; acting alone or in cooperation with another to falsify records or to obtain dishonestly grades, honors, awards, or professional endorsement; altering, forging, or misusing a University academic record; or fabricating or falsifying data, research procedures, or data analysis. (Student Conduct Code: \url{http://regents.umn.edu/sites/regents.umn.edu/files/policies/Student_Conduct_Code.pdf}) If it is determined that a student has cheated, he or she may be given an "F" or an "N" for the course, and may face additional sanctions from the University. For additional information, please see: \url{http://policy.umn.edu/education/instructorresp}.
+
+The Office for Student Conduct and Academic Integrity has compiled a useful list of Frequently Asked Questions pertaining to scholastic dishonesty: \url{http://www1.umn.edu/oscai/integrity/student/index.html}. If you have additional questions, please clarify with your instructor for the course. Your instructor can respond to your specific questions regarding what would constitute scholastic dishonesty in the context of a particular class-e.g., whether collaboration on assignments is permitted, requirements and methods for citing sources, if electronic aids are permitted or prohibited during an exam.
+
+\vspace{10pt}
+\noindent\textbf{Makeup Work for Legitimate Absences}
+
+\hspace{3mm}
+Students will not be penalized for absence or late work during the semester due to unavoidable or legitimate circumstances, provided that the instructors are notified prior to the absence (if possible) and a signed note explaining the absence is provided. Such circumstances include verified illness, participation in intercollegiate athletic events, subpoenas, jury duty, military service, bereavement, and religious observances. Such circumstances do not include voting in local, state, or national elections. Arrangements for delayed work must also be made in advance, with the exception of unanticipated emergency situations, in which the instructor may, at their discretion, excuse absence(s) and/or late and/or missing assignments.
+
+Students must notify their instructors of circumstances leading to a request for makeup work as soon as possible and provide information to explain the absence. Some situations will be sufficiently urgent that arrangements for makeup work cannot be made prior to the date of an absence.  In such cases, arrangements should be made as soon as possible following the student’s return.
+
+For additional information, please see: http://policy.umn.edu/education/makeupwork.
+
+\vspace{10pt}
+\noindent\textbf{Office hours}
+
+\hspace{3mm}
+Faculty and TA office hours will are to benefit learning with the addition of the possibility of one-on-one and small-group learning time. Students are encouraged to attend office hours to supplement their learning. However, office hours are not intended as a replacement for class: students who miss a class period will not receive a makeup lesson on this material during office hours. They will instead be directed to the online course materials, the readings, and their student colleagues' notes.
+
+\vspace{10pt}
+\noindent\textbf{Appropriate Student Use of Class Notes and Course Materials}
+
+\hspace{3mm}
+Taking notes is a means of recording information but more importantly of personally absorbing and integrating the educational experience. However, broadly disseminating class notes beyond the classroom community or accepting compensation for taking and distributing classroom notes undermines instructor interests in their intellectual work product while not substantially furthering instructor and student interests in effective learning. Such actions violate shared norms and standards of the academic community. For additional information, please see: \url{http://policy.umn.edu/education/studentresp}.
+
+\vspace{10pt}
+\noindent\textbf{Grading and Transcripts}
+
+\hspace{3mm}
+The University utilizes plus and minus grading on a 4.000 cumulative grade point scale in accordance with the following:
+
+\begin{centering}
+\begin{tabular}{p{.05\linewidth}p{.1\linewidth}p{.65\linewidth}}
+\hline
+A	&	4.000 & Represents achievement that is outstanding relative to the level necessary to meet course requirements \\
+A-	&	3.667 & \\
+B+	&	3.333 & \\
+B	&	3.000 & Represents achievement that is significantly above the level necessary to meet course requirements \\
+B-	&	2.667 & \\
+C+	&	2.333 & \\
+C	&	2.000 & Represents achievement that meets the course requirements in every respect \\
+C-	&	1.667 & \\
+D+	&	1.333 & \\
+D	&	1.000 & Represents achievement that is worthy of credit even though it fails to meet fully the course requirements \\
+S	&	--    & Represents achievement that is satisfactory, which is equivalent to a C- or better. \\
+\hline
+\end{tabular}
+\end{centering}
+\vspace{10pt}
+
+For additional information, please refer to: \url{http://policy.umn.edu/education/gradingtranscripts}.
+
+\vspace{10pt}
+\noindent\textbf{Sexual Harassment}
+
+\hspace{3mm}
+"Sexual harassment" means unwelcome sexual advances, requests for sexual favors, and/or other verbal or physical conduct of a sexual nature. Such conduct has the purpose or effect of unreasonably interfering with an individual's work or academic performance or creating an intimidating, hostile, or offensive working or academic environment in any University activity or program. Such behavior is not acceptable in the University setting. For additional information, please consult Board of Regents Policy: \url{http://regents.umn.edu/sites/regents.umn.edu/files/policies/SexHarassment.pdf}.
+
+Equity, Diversity, Equal Opportunity, and Affirmative Action
+The University provides equal access to and opportunity in its programs and facilities, without regard to race, color, creed, religion, national origin, gender, age, marital status, disability, public assistance status, veteran status, sexual orientation, gender identity, or gender expression. For more information, please consult Board of Regents Policy: \url{http://regents.umn.edu/sites/regents.umn.edu/files/policies/Equity_Diversity_EO_AA.pdf}.
+
+\vspace{10pt}
+\noindent\textbf{Disability Accommodations}
+
+\hspace{3mm}
+The University of Minnesota is committed to providing equitable access to learning opportunities for all students. The Disability Resource Center is the campus office that collaborates with students who have disabilities to provide and/or arrange reasonable accommodations.
+
+If you have, or think you may have, a disability (e.g., mental health, attentional, learning, chronic health, sensory, or physical), please contact Disability Resource Center at 612-626-1333 to arrange a confidential discussion regarding equitable access and reasonable accommodations.
+
+If you are registered with Disability Resource Center and have a current letter requesting reasonable accommodations, please contact your instructor as early in the semester as possible to discuss how the accommodations will be applied in the course.
+
+For more information, please see the Disability Resource Center website, \url{https://diversity.umn.edu/disability/}.
+
+\vspace{10pt}
+\noindent\textbf{Mental Health and Stress Management}
+
+\hspace{3mm}
+As a student you may experience a range of issues that can cause barriers to learning, such as strained relationships, increased anxiety, alcohol/drug problems, feeling down, difficulty concentrating and/or lack of motivation. These mental health concerns or stressful events may lead to diminished academic performance and may reduce your ability to participate in daily activities. University of Minnesota services are available to assist you. You can learn more about the broad range of confidential mental health services available on campus via the Student Mental Health Website: http://www.mentalhealth.umn.edu.
+
+\vspace{10pt}
+\noindent\textbf{Academic Freedom and Responsibility}
+Academic freedom is a cornerstone of the University. Within the scope and content of the course as defined by the instructor, it includes the freedom to discuss relevant matters in the classroom. Along with this freedom comes responsibility. Students are encouraged to develop the capacity for critical judgment and to engage in a sustained and independent search for truth. Students are free to take reasoned exception to the views offered in any course of study and to reserve judgment about matters of opinion, but they are responsible for learning the content of any course of study for which they are enrolled.*
+
+Reports of concerns about academic freedom are taken seriously, and there are individuals and offices available for help. Contact the instructor, the Department Chair, your adviser, the associate dean of the college, or the Vice Provost for Faculty and Academic Affairs in the Office of the Provost. [Customize with names and contact information as appropriate for the course/college/campus.]
+
+* Language adapted from the American Association of University Professors "Joint Statement on Rights and Freedoms of Students".
+
+\newpage
+
+\end{document}
+
+
+

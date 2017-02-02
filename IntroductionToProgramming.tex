@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures 1--2: Introduction to Computer Programming and Python}
+\title{Part 1: Introduction to Computer Programming and Python}
 \author{Andrew D. Wickert}
 
 \usepackage{listings}
@@ -365,7 +365,7 @@ What happens if we want negative numbers? Well, we can choose the sign with one 
 \begin{center}
 \includegraphics[width=.8\linewidth]{figures/Introduction/ASCII_Code_Chart-Quick_ref_card.png}
 \end{center}
-\caption{ASCII is probably the most simple and widely-used method of encoding letters and numbers. It was originally developed in the 1960's for telephone operators for teletype machines; this fa Ever wonder why we can't have umlauts in email addresses? Or why so many people use all flat lines (hyphen, minus sign, and dashes) as the same thing? It's ASCII's fault! But there is only so much one can do with 128 characters.}
+\caption{ASCII is probably the most simple and widely-used method of encoding letters and numbers. It was originally developed in the 1960's for telephone operators for teletype machines, and was based on telegraph codes. Ever wonder why we can't have umlauts in email addresses? Or why so many people use all flat lines (hyphen, minus sign, and dashes) as the same thing? It's ASCII's fault! But there is only so much one can do with 128 characters.}
 \end{figure}
 
 The rules for bytes can then be extrapolated to 16-, 32-, and 64-bit values. These can generate huge integers!
@@ -482,13 +482,14 @@ See Downey, p. 16, 18
 Operator	& Numbers			& Strings (and lists)							& Booleans \\
 \hline
 $+$		& Addition			& Concatenation								&	OR 							\\
-		& $1.5 + 3 \rightarrow 4$	& \lstinline{'cow' + 's'} $\rightarrow$ \lstinline{'cows'}		& \lstinline{bool(True + False)} $\rightarrow$ \lstinline{True} \\
-		& 				& \lstinline{[1, 2] + ['cow']} $\rightarrow$ \lstinline{[1, 2, 'cow']}	& 								\\
+		& $1.5 + 3 \rightarrow 4$	& {\lstinline!'cow' + 's'!} $\rightarrow$ {\lstinline!'cows'!}		& {\lstinline!bool(True + False)!} $\rightarrow$ {\lstinline!True!} \\
+		& 				& {\lstinline![1, 2] + ['cow']!} $\rightarrow$ {\lstinline![1, 2, 'cow']!}	& 								\\
 $-$		& Subtraction			&									& 	NOT (XOR)						\\
-		& $1.5 - 3 \rightarrow -1.5$	& 									& \lstinline{bool(True - False)} $\rightarrow$ \lstinline{True} \\
+		& $1.5 - 3 \rightarrow -1.5$	& 									& {\lstinline!bool(True - False)!} $\rightarrow$ {\lstinline!True!} \\
+		& 				& 									& {\lstinline!bool(False - True)!} $\rightarrow$ {\lstinline!True!} \\
 $*$		& Multiplication		& Repetition								& 	AND							\\
-		& $1.5 - 3 \rightarrow -1.5$	& \lstinline{'cow' * 2} $\rightarrow$ \lstinline{'cowcow'}		& \lstinline{bool(True * False)} $\rightarrow$ \lstinline{False} \\
-		& 				& \lstinline{[1, 2] * 2} $\rightarrow$ \lstinline{[1, 2, 1, 2]}		& 								\\
+		& $1.5 - 3 \rightarrow -1.5$	& {\lstinline!'cow' * 2!} $\rightarrow$ {\lstinline!'cowcow'!}		& {\lstinline!bool(True * False)!} $\rightarrow$ {\lstinline!False!}\\
+		& 				& {\lstinline![1, 2] * 2!} $\rightarrow$ {\lstinline![1, 2, 1, 2]!}		& 								\\
 $/$		& Division			& 									& 								\\
 		& Division			& 									& 								\\
 $**$		& Exponentiation		& 									& 								\\
@@ -780,6 +781,6 @@ You are of course not required to post your code on github or to create an accou
 
 This last example is something we can go through as a class. I challenge you to use the concepts you have learned about writing good code to improve upon this -- consider how to make plotting less repetative, bundle the code into sections, and perhaps make it into a set of functions with inputs and outputs -- or even a class (object).
 
-\lstinputlisting{code/Introduction/randomWalk1D_before_class.py}
+\lstinputlisting{code/Introduction/randomWalk1D.py}
 
 \end{document}
