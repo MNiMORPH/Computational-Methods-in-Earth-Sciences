@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures 3--4: Working with Files and Data, including geospatial methods and plotting}
+\title{Working with Files and Data, including geospatial methods and plotting}
 \author{Andrew D. Wickert}
 
 \usepackage{listings}
@@ -67,9 +67,9 @@ The geosciences are full of a range of data types---from mapping and surveys to 
 
 Data can be stored as text (typically ASCII) or binary values. Often, one file contains one data set. However, more advanced data storage formats like NetCDF and HDF are also widely-used---these act as containers for multiple related pieces of multidimensional data. NetCDF is more common and is often used for amospheric, oceanographic, glaciologic---generally climate-related data. atmospheric science data and models. It is now also being used by the Community Surface Dynamics Modeling System (CSDMS) as a standard format for geological model input and output. HDF was developed by NASA, and therefore is often used for satellite remotely-sensed data. Unless you do quite a lot of work with these kinds of data and models, you may not come across these---but it is important to know at least a little about them.
 
-Along with the basics of data storage and retrieval, we are going to have to learn how to display the data. This will likely be one of the more useful skills taught in theis course, because you will learn how to write reusable computer code to generate publication-quality figures. Learnin gthe plotting commands takes a bit of time, as does writing the code---but in my experience, this saves hours in the long run. Having the ability to generate reusable plots also makes one more willing to revise data analyses, knowing that time will not be wasted \textit{per se} on laboriously recreating plots by hand. It also lets one make a whole set of similar plots for displaying large amounts of data.
+Along with the basics of data storage and retrieval, we are going to have to learn how to display the data. This will likely be one of the more useful skills taught in theis course, because you will learn how to write reusable computer code to generate publication-quality figures. Learning the plotting commands takes a bit of time, as does writing the code---but in my experience, this saves hours in the long run. Having the ability to generate reusable plots also makes one more willing to revise data analyses, knowing that time will not be wasted on laboriously recreating plots by hand. It also lets one make a whole set of similar plots for displaying large amounts of data.
 
-Oftentimes in the geosciences, we want to plot geospatial data. I will show how you can install mapping packages and use GIS tools to do just this. I will also point out and (in some cases) very briefly discuss the Python interfaces to GRASS GIS, Arc GIS, and QGIS, the three leading scientific geospatial platforms. These come with a set of premade tools to make it possible to run very involved analyses in just a few lines of code.
+Oftentimes in the geosciences, we want to plot geospatial data. I will show how you can install mapping packages and use GIS tools to do just this. I will also point out and (in some cases) very briefly discuss the Python interfaces to GRASS GIS, Arc GIS, and QGIS, the three leading scientific geospatial platforms. These come with a set of premade tools to make it possible to run very involved analyses in just a few lines of code. We will spend some more significant time going over GDAL and OGR: these are the libraries that underlie all GIS engines, and can be accessed directly from Python.
 
 \begin{framed}
 \noindent\textbf{pip and easy\_install}
@@ -90,10 +90,10 @@ In ASCII, the number ``45'' would require 2 bytes of storage. ``61.083'' would r
 
 A very important historical note is the controversy about line-endings. It may sound trivial, but it can turn a successful data import into a failure! Here it is:
 \begin{itemize}
- \item UNIX-based computers end lines of text with a newline character, \lstinline{\n} (ASCII 10)
- \item DOS/Windows-based computers end lines of text with a carriage return, \lstinline{\r\n} (ASCII 13, then ASCII 10)
+ \item UNIX-based computers end lines of text with a newline or ``line feed'' character, \lstinline{\n} (ASCII 10)
+ \item DOS/Windows-based computers end lines of text with a carriage return, followed by a newline character \lstinline{\r\n} (ASCII 13, then ASCII 10)
 \end{itemize}
-This seemingly small detail has its basis in the mechanics of the transition from typewriters to computers: with typewriters, one must advance to a new line (``line feed'' or ``newline'', ASCII 10) and push the roll of paper all the way back to the start of the line (``carriage return'', ASCII 13). Computers can instead produce a new line all at once, because they are not limited to moving paper in physical space. This led to ASCII 10 being used on UNIX systems, and the typewriter-looking [ASCII 13, ASCII 10] being used on Windows systems, and a potential whole world of trouble! It can mean that, if you have a file with delimited data (e.g., csv -- comma-separated values), that you cannot tell where one line ends and another begins if your computer looks for the wrong newline character! This is a problme that can often happen if, like most computer users, one is working on Windows but then needs to do a probject on a supercomputer (mostly UNIX). Many pieces of software are becoming smarter about this difference, but this is one of the great and unfortunate schisms in computing that happened in the early days, when we were really just learning what we are doing, and has been carried forward to the present.
+This seemingly small detail has its basis in the mechanics of the transition from typewriters to computers: with typewriters, one must advance to a new line (``line feed'' or ``newline'', ASCII 10) and push the roll of paper all the way back to the start of the line (``carriage return'', ASCII 13). Computers can instead produce a new line all at once, because they are not limited to moving paper in physical space. This led to ASCII 10 being used on UNIX systems, and the typewriter-looking [ASCII 13, ASCII 10] being used on Windows systems, and a potential whole world of trouble! It can mean that, if you have a file with delimited data (e.g., csv -- comma-separated values), that you cannot tell where one line ends and another begins if your computer looks for the wrong newline character! This is a problem that can often happen if, like most computer users, one is working on Windows but then needs to do a probject on a supercomputer (mostly UNIX). Many pieces of software are becoming smarter about this difference, but this is one of the great and unfortunate schisms in computing that happened in the early days, when we were really just learning what we are doing, and has been carried forward to the present.
 \end{framed}
 
 \subsection{Practice}
@@ -326,5 +326,13 @@ Here, I return to the TRMM dataset that we used earlier to show a global plot th
 \end{center}
 \caption{TRMM data from June 2004 (which is when the writer of these course notes graduated from high school), now nicely plotted on a real Earth. Yes, we're getting closer to being computational Earth scientists!}
 \end{figure}
+
+\section{Plotting geospatial data using CartoPy}
+
+\section{Python--GIS integration}
+
+\subsection{GDAL and OGR}
+
+\url{https://pcjericks.github.io/py-gdalogr-cookbook/}
 
 \end{document}
