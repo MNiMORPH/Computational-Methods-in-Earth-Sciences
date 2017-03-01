@@ -3,8 +3,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Input variables
-file_name = '../data/ClastCountCompilation_sample.xlsx'
+file_name = '../../data/ClastCountCompilation_sample.xlsx'
 wb = openpyxl.load_workbook(file_name)
+
 def values_in_column(sheet, n, m=8):
   outlist = []
   cells = sheet.columns[n][m:]
