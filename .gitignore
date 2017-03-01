@@ -84,3 +84,6 @@ target/
 *#
 *~
 *.swp
+
+# Movies I use in lecture (and may be copyrighted)
+*.mp4
