@@ -5,6 +5,9 @@ from matplotlib import pyplot as plt
 sheet_title = 'Renland d18O' # set outside for use in plotting
 data = pd.read_excel('../../data/vinther2008renland-agassiz.xlsx', \
                       sheetname=sheet_title, header=72)
+# Note that they also include a % sign in front of all header lines.
+# How might you re-code this to dynamically learn how long the header is
+# and skip over it?
 
 # Give headers better names
 data.columns = ['years [b2k]', 'depth [m]', 'del18O [permil]']
