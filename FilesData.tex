@@ -286,7 +286,7 @@ Below, I have converted an HDF4 file from the TRMM satellite (Tropical Rainfall 
 
 So far, we've discussed all of these data formats that might be a bit more complex -- and these are all important for work with computers and larger data sets. However, many of us in the Earth sciences deal with spreadsheet data. Up until now, most (all?) of you have worked only by hand with this data. But no longer!
 
-There many packages to work with spreadsheets. I will show you only the builtin method with Pandas here, but you should know about at least the two following ones (available via \lstinline{pip}):
+There many packages to work with spreadsheets. I will show you first the builtin method with Pandas here, but you should know about at least the two following ones (available via \lstinline{pip}):
 \begin{itemize}
  \item openpyxl (Excel)
  \item odfpy (LibreOffice)
@@ -303,6 +303,16 @@ Here, we are going to plot an oxygen isotope history from a Greenland ice core:
 \end{center}
 \caption{This is what the final graph of $\delta^{18}$O should look like from the above code. Up is warm and down is cold, roughly-speaking: these values are also related to global ice volume. Note the Bølling-Allerød warm period $\sim$14.5 ka, the Younger Dryas $\sim$11.7--13 ka, and the 8.2 ka event (the little negative spike in the Holocene related to catastrophic meltwater release from North American proglacial lakes into the North Atlantic ocean).}
 \end{figure}
+
+Openpyxl is also easy-to-use. Here is a quick example that I wrote for some real research -- to analyze sets of grain sizes of sediment from point counts of clasts. These data were transcribed from our field notebooks into a standard Excel format (thanks to Sara Savi), and I wrote the code that uses her standard Excel format to parse and compute statistics of different counts of grain size.
+
+Go ahead and brainstorm how you might use this in your own work; we may spend some time going over this in class, as spreadsheets are really common.
+
+\lstinputlisting{code/FilesData/GreenlandXLSXpandas.py}
+
+\section{Stream gauging: an example}
+
+\todo{Write new example for Monday with code from laptop that I wrote for the Mississippi}
 
 \section{Plotting geospatial data using Basemap}
 
