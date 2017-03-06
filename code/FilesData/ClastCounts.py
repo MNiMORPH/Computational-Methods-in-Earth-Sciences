@@ -53,10 +53,14 @@ Dmean = (Dmin + Dmax)/2.
 Dclassified = []
 for D in Ds:
   Dclasses = []
-  Dclasses.append(np.percentile(D, 50)) # D50
-  Dclasses.append(np.percentile(D, 84)) # D84
-  for i in range(len(Dmin)):
-    Dclasses.append(np.sum( (D >= Dmin[i]) * (D < Dmax[i]) ))
+  if len(D) > 0:
+    Dclasses.append(np.percentile(D, 50)) # D50
+    Dclasses.append(np.percentile(D, 84)) # D84
+    for i in range(len(Dmin)):
+      Dclasses.append(np.sum( (D >= Dmin[i]) * (D < Dmax[i]) ))
+  else:
+    for i in range(len(Dmin)+2):
+      Dclasses.append(np.nan)
   Dclassified.append(Dclasses)
   
 
