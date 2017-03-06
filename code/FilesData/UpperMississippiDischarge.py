@@ -69,5 +69,5 @@ for gauge in Mississippi_Gauges:
 out = np.array([ID, lat, lon, HUC, Q_mean, LenRecord]).transpose()
 # Add drainage area in km2 by hand, from
 # https://water.usgs.gov/GIS/huc_name.html
-np.savetxt('MississippiQA.csv', out, delimiter=',', fmt='%s')
+np.savetxt('UpperMississippiQ.csv', out, delimiter=',', fmt='%s')
 
