@@ -87,3 +87,9 @@ target/
 
 # Movies I use in lecture (and may be copyrighted)
 *.mp4
+
+# Dropbox
+*onflicted*
+
+# Private info
+*tudent*
