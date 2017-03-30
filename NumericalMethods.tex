@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 
 % Title Page
-\title{Lectures ?--?: Computer Modeling and Finite Difference Methods}
+\title{Computer Modeling and Finite Difference Methods}
 \author{Andrew D. Wickert}
 \date{Last updated \today}
 
@@ -92,70 +92,206 @@ The first computer program was written in 1843 (or maybe 1842) by Lady Ada Lovel
 A vector is a one-dimensional matrix. It is thus a special case of the more general class of matrices. It may be a row,
 \begin{equation}
 \vec{a} =
- \begin{pmatrix}
+ \begin{bmatrix}
   a_{1} & a_{2} & \cdots & a_{n} \\
- \end{pmatrix},
+ \end{bmatrix},
 \end{equation}
 or a column,
 \begin{equation}
 \vec{a} =
- \begin{pmatrix}
+ \begin{bmatrix}
   a_{1} \\
   a_{2} \\
   \vdots \\
   a_{m}
- \end{pmatrix}.
+ \end{bmatrix}.
 \end{equation}
 
 Vectors can define a direction. For example, in three dimensions:
 \begin{equation}
 \vec{r} =
- \begin{pmatrix}
+ \begin{bmatrix}
   x \\
   y \\
   z
- \end{pmatrix}.
+ \end{bmatrix}.
 \end{equation}
+
+In addition to the top arrow notation, a boldface (but italicized) notation is also common for vectors:
+\begin{equation}
+\vec{a} = \boldsymbol{a}
+\end{equation}
+
 
 \subsection{Two-dimensional matrices}
 
+A two-dimensional matrix of $m$ rows and $n$ columns can be represented in a way that is an extension of our vector notation; these are represented by boldface Roman (non-italic) characters. They are often, but not always, represented by capital letters:
+\begin{equation}
+\mathbf{A} =
+ \begin{bmatrix}
+  a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+  a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n} \\
+ \end{bmatrix}
+\end{equation}
 
+A 3$\times$3 matrix is often used to represent a \textit{tensor} that can define the orientation and dimensions in a three-dimensional shape (ellipsoid). Such a matrix can also describe stress-strain relationships, mineral symmetry, or any other material anisotropy (or isotropy, if the 3$\times$3 matrix is the identity matrix).
+
+One special matrix is the \emph{Identity} matrix, which is an expansion of ``1'' for an array:
+\begin{equation}
+\mathbf{I} =
+ \begin{bmatrix}
+  1 & 0 & \cdots & 0 \\
+  0 & 1 & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \cdots & 1 \\
+ \end{bmatrix}
+\end{equation}
+
+\subsection{Matrix operations}
+
+\subsubsection{Matrix multiplication}
+
+To multiply two matrices, $\mathbf{A} \times \mathbf{B}$, follow these steps:
+\begin{enumerate}
+ \item Multiply each number in the first column of the matrix on the left ($\mathbf{A}$) by each number in the first row of the matrix on the right ($\mathbf{B}$), in order: $\mathbf{A}_{1,1} \times \mathbf{B}_{1,1}$, $\mathbf{A}_{2,1} \times \mathbf{B}_{1,2}$, ..., $\mathbf{A}_{1,n} \times \mathbf{B}_{m,1}$. Note that in order for this to work, the number of rows in matrix $\mathbf{A}$ must equal the number of columns in matrix $\mathbf{B}$.
+ \item Sum all of these products that you have just calculated.
+ \item The result is the values for the resultant matrix in location (1,1).
+ \item Repeat this for each row in Matrix $\mathbf{A}$ and column in Matrix $\mathbf{B}$. If the sizes of these arrays are ($m_\mathbf{A} \times n_\mathbf{A}$) and ($m_\mathbf{B} \times n_\mathbf{B}$), then your resultant array will have dimensions ($m_\mathbf{A} \times n_\mathbf{B}$).
+\end{enumerate}
+
+An example of matrix multiplication follows:
+
+\begin{align}
+ \mathbf{A} \mathbf{B} = &
+ \begin{bmatrix}
+  a_{1,1} & a_{1,2} & a_{1,3} \\
+  a_{2,1} & a_{2,2} & a_{2,3} \\
+ \end{bmatrix}
+ \begin{bmatrix}
+  b_{1,1} & b_{1,2} \\
+  b_{2,1} & b_{2,2} \\
+  b_{3,1} & b_{3,2} \\
+ \end{bmatrix}
+ = \\
+ &
+ \begin{bmatrix}
+  a_{1,1} b_{1,1} + a_{1,2} b_{2,1} + a_{1,3} b_{3,1} & a_{1,1} b_{1,2} + a_{1,2} b_{2,2} + a_{1,3} b_{3,2} \\
+  a_{2,1} b_{1,1} + a_{2,2} b_{2,1} + a_{2,3} b_{3,1} & 4d {2,1} b_{1,2} + a_{2,2} b_{2,2} + a_{2,3} b_{3,2} \\
+ \end{bmatrix}
+\end{align}
+
+I usually think of matrix multiplication as ``over... down''. But some better memonics include ``karate... chop!'' (the ``chop'' being obviously down) and the visual way of multiplying A and B, as follows:
+\begin{align}
+ \mathbf{A} \mathbf{B} = &\\
+ &
+ \begin{bmatrix}
+  b_{1,1} & b_{1,2} \\
+  b_{2,1} & b_{2,2} \\
+  b_{3,1} & b_{3,2} \\
+ \end{bmatrix}
+ \\
+ \begin{bmatrix}
+  a_{1,1} & a_{1,2} & a_{1,3} \\
+  a_{2,1} & a_{2,2} & a_{2,3} \\
+ \end{bmatrix}
+ &
+ \begin{bmatrix}
+  \phantom{b_{3,1}} & \phantom{b_{1,3}} \\
+  \phantom{b_{3,2}} & \phantom{b_{3,2}} \\
+ \end{bmatrix}
+\end{align}
+Here, the empty matrix can be filled with the values by multiplying the rows and columns that project (on a straight line) into that cell. (Thanks to Jack for both of these.)
+
+\subsection{Determinants}
+
+\todo{}
 
 \subsection{Matrix equations}
 
-
+\todo{}
 
 \subsubsection{Dot products}
 
+\begin{figure}[ht!]
+\begin{center}
+ \includegraphics[width=.5\linewidth]{figures/NumericalAndMath/Dot_Product.png}
+\end{center}
+ \caption{The dot product can be thought of as the scalar product of the magnitude of one vector, times the magnitude of another vector that has been projected onto it. \url{https://commons.wikimedia.org/wiki/File:Dot_Product.svg}.}
+\end{figure}
+
+
+The dot product between two arrays can be visualized as the magnitude the product of two $n$-dimensional vectors. It is therefore also called the ``scalar product'', because it gives a scalar result.
+\begin{equation}
+ \vec{a} \cdot \vec{b} =
+ \begin{bmatrix}
+  a_{1} & a_{2} & \cdots & a_{n}
+ \end{bmatrix}
+ \begin{bmatrix}
+  b_{1} \\
+  b_{2} \\
+  \vdots \\
+  b_{m}
+ \end{bmatrix}
+ = \sum_{i=1}^{m(=n)} a_i b_i
+\end{equation}
+
+If you know the angle, $\theta_{\vec{a},\vec{b}}$, between the two vectors, a dot product can also be represented as:
+\begin{equation}
+ \left| \vec{a} \right|  \left| \vec{b} \right| \cos{ \left( \theta_{\vec{a},\vec{b}} \right) }
+\end{equation}
 
 
 \subsubsection{Cross products}
 
+\begin{figure}[ht!]
+\begin{center}
+ \includegraphics[width=.5\linewidth]{figures/NumericalAndMath/1280px-Cross_product_parallelogram.png}
+\end{center}
+ \caption{Graphical definition of the cross-product of two vectors. \url{https://commons.wikimedia.org/wiki/File:Cross_product_parallelogram.svg}.}
+\end{figure}
+
+A cross product, or ``vector product'', gives the magnitude and direction of a product of two vectors, $\vec{a}$ and $\vec{b}$, where the magnitude is the area of the parallelogram created by the two vectors and the direction is given by the right-hand rule. 
+
+\begin{figure}[ht!]
+\begin{center}
+ \includegraphics[width=.5\linewidth]{figures/NumericalAndMath/507px-Right_hand_rule_cross_product.png}
+\end{center}
+ \caption{Direction of a cross-product of vectors $\vec{a} \times \vec{b}$ as given by the right-hand rule. \url{https://commons.wikimedia.org/wiki/File:Right_hand_rule_cross_product.svg}.}
+\end{figure}
+
+The cross product can be solved in a 3-space (so for two orthogonal 2-D vectors) by solving the determinant of
+
+The scalar value of the cross product can also be obtained as follows:
+
+\subsection{Dot and cross products}
+
+The relationship between the dot and cross products is that:
+\begin{equation}
+ \left\| \vec{a} \times vec{b} \right\|^2  = \left\| \vec{a}\right\|^2  \left\|\vec{b}\right\|^2 - (\vec{a} \cdot \vec{b})^2
+\end{equation}
 
 
-\subsubsection{Matrix multiplication}
+
+\subsubsection{Trace}
+
+The trace operator is given by the sum of the diagonal elements:
+
+\begin{equation}
+ \text{Tr}\left(\mathbf{A}\right) = \sum \mathbf{A} \mathbf{I}
+\end{equation}
 
 
+\subsubsection{Einstein notation}
 
-
-\subsubsection{Notation}
-
-
-
-\subsection{Operators}
-
-
-
-
-Einstein notation
-
-\subsubsection{}
-
-
+\todo{}
 
 \subsection{Derivatives}
 
 A derivative is the change in a function ($f(x)$) with respect to the change in the independent variable ($x$) as the interval ($\Delta x$) approaches 0:
+
+\subsubsection{Ordinary}
 
 \begin{equation}
  \frac{d}{{dx}}f\left( x \right) = \mathop {\lim }\limits_{\Delta x \to 0} \frac{{f\left( {x + \Delta x } \right) - f\left( x \right)}}{\Delta x }
@@ -170,12 +306,26 @@ A derivative is the change in a function ($f(x)$) with respect to the change in 
 
 \todo{Create a better figure for derivative definition and finite difference, with shown $\Delta x$}
 
+\subsubsection{Partial}
+
+\todo{}
+
 \subsection{Integrals}
 
-Integration 
-An indefinite integral 
+Antiderivatives, or integrals, provide the sum of the area under a given curve. These are very useful for solving problems involving processes that occur over space, time, or other (more mathematical, less tangible) dimensions. An example of a non-tangible dimensions would be one that relates to a degree of freedom of some equation and/or error analysis.
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=.5\linewidth]{figures/NumericalAndMath/IntegralExample.pdf}
+\end{center}
+\caption{An integral is the sum of all area under a curve. (Contributed to Wikimedia Commons by User:KSmrq)}
+\end{figure}
 
+Indefinite integrals can be defined as:
+
+Definite integrals can be defined as:
+
+\todo{Check}
 
 \begin{equation}
 \int_a^b \! f(x)\,dx = F(b) - F(a)
@@ -190,13 +340,6 @@ An indefinite integral
 \includegraphics[width=.5\linewidth]{figures/NumericalAndMath/BerlinWannsee.jpg}
 \end{center}
 \caption{This ``S'' in the Berlin--Wannsee station sign is written in the old style. It is used for integrals to stand for ``sum'', as the area under a curve can be imagined to be a sum $\left( \sum \right)$ of every infinitessimally thin column of space under a curve.}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=.5\linewidth]{figures/NumericalAndMath/IntegralExample.pdf}
-\end{center}
-\caption{An integral is the sum of all area under a curve. (Contributed to Wikimedia Commons by User:KSmrq)}
 \end{figure}
 
 \subsection{Taylor series}
@@ -215,16 +358,24 @@ where $n$ is the number of the derivative of $f$.
 \begin{center}
 \includegraphics[width=.8\linewidth]{figures/NumericalAndMath/Taylor_Approximation_of_sin(x).jpeg}
 \end{center}
-\caption{Increasing orders of the derivative $n$, denoted P$n$, where $n = 1, 2, 3, \cdots$, show the increasing approximation of a sum of polynomials to the sine function.}
+\caption{Increasing orders of the Taylor series expansion (and thus its derivative), denoted P$n$, where $n = 1, 2, 3, \cdots$, show the increasing approximation of a sum of polynomials to the sine function.}
 \end{figure}
 
 \section{Finite difference}
 
 One of the most useful functions of computers is their ability to approximate the values of derivatives at points. This allow us to directly compute approximations of the values of derivatives in differential equations and therefore solve them, typically through space and/or time.
 
-You may have wondered why I covered derivatives and Taylor series right after one another. This is because these provide two ways to generate finite difference solutions to differential equations. The definition of a derivative provides a way to think of a derivative as the linear tangent to a curve at a given point -- and hence, also, to be well-approximated by a straight line over a finite distance so long as that distance is small compared to the nonlinearity of the curve that it is approximating. The Taylor series provides a less-visual but more powerful way to consider higher-order equations that could fit a curve near a certain point.
+You may have wondered why I covered derivatives and Taylor series right after one another. This is because these provide two ways to generate finite difference solutions to differential equations. The definition of a derivative provides a way to think of a derivative as the linear tangent to a curve at a given point -- and hence, also, to be well-approximated by a straight line over a finite distance so long as that distance is small compared to the nonlinearity of the curve that it is approximating. This is the same as the second term in the Taylor series expansion.
 
-The result of this section will be a formalilzation of the \textbf{finite difference method}, by which a set of differential equations is estimated on a grid with constant spacings between grid cells (hence finite difference) and then solved. To provide a bit more background, finite difference is just one of several major methods for modeling with continuum equations. Other methods are finite volume (similar to finite difference except considering full cell volume, finite element (which allows a more irregular grid) and spectral (using how something varies in terms of periodic functions in order to write solutions to equations). Agent-based models that follow the actions of individual ``agets'' in a computational space also exist. These agents are often given simple rules and then allowed to interact with one another.
+The Taylor series provides a way to consider higher-order equations that could fit a curve near a certain point. A straight line often is not a poor fit, but if we want to replace an arbitrary function with an infinitely differentiable polynomial, generating a Taylor series approximation is an easy way to do so -- and thus, to numerically solve differential euqations.
+
+The result of this section will be a formalilzation of the \textbf{finite difference method}, by which a set of differential equations is estimated on a grid with constant (but not necessarily uniform) spacings between grid cells (hence finite difference) and then solved. By this, I mean that the distances between grid points stays constant across the varaible over which you are integrating, but may vary with respect to any other variables.
+
+In this class, we will most likey truncate all expansions after the linear first terms: the higher-order terms are more work to include, for both you and the computer, and smaller time-steps or more clever solutiom nethods can often make up for not having them.
+
+\subsection{Where this fits in the spectrum of modeling}
+
+To provide a bit more background, finite difference is just one of several major methods for modeling with continuum equations. Other methods are finite volume (similar to finite difference except considering full cell volume, finite element (which allows a more irregular grid) and spectral (using how something varies in terms of periodic functions in order to write solutions to equations -- this generally requires Fourier and/or other spectral transformations of the equations). Agent-based models that follow the actions of individual ``agets'' in a computational space also exist. These agents are often given simple rules and then allowed to interact with one another.
 
 \subsection{Thermal diffusion}
 
@@ -239,28 +390,86 @@ The constant of proportionality, $k$, is called the ``thermal conductivity'' and
 
 Putting all of these together, we can write (in one dimension):
 \begin{equation}
- q_x = k \frac{d T}{d x}
+ q_x = -k \frac{d T}{d x}
+ \label{eq:FourierThermal}
 \end{equation}
-Here, $q_x$ is the heat flux (units of Watts per meter squared [W m$^{-2}$]).
+Here, $q_x$ is the heat flux (units of Watts per meter squared [W m$^{-2}$]). $x$ indicates that we are solving the equation in the $x$-direction; we will work with a one-dimensional solution here, though you can imagine higher-dimensional solutions to require 2-D instead of 1-D arrays of values for our numerical implementation. The negative sign indicates that heat is flowing downgradient, from hotter items to colder ones.
 
-This can be paired with an expression that relates heat flux to change in temperature. As one might expect, temperature increases with heat flux in and decreases with heat flux out. So it is the negative spatial derivative of heat flux that provides the negative divergence (i.e. convergence) of heat at the point of interest. Assuming no phase changes (e.g., solid to liquid), this occurrs at a rate that is inversely proportional to the heat capacity of the material. This is given by the specific heat capacity, here given assuming constant pressure ($c_p$), times the density ($\rho$). Given again in one dimension:
+This expression for thermal conduction (Fourier's Law of Thermal Conduction \todo{check}) can be paired with an expression that describes how the transfer of heat from one object to another results in changes in temperature. This change in temperature produces a \textit{feedback}, by which an object that is conducting heat to another object cools (while the other object warms. This decreases the gradient in temperature between the two objects, and therefore decreases the heat flux.
+
+As one might expect, temperature increases with heat flux into an object and decreases with heat flux out of an object. The negative spatial derivative of heat flux provides the negative divergence (i.e. convergence) of heat at the point of interest. Assuming no phase changes (e.g., solid to liquid), this occurrs at a rate that is inversely proportional to the specific heat capacity of the material and its density.
 \begin{equation}
- \frac{\partial T}{\partial t} = -\frac{1}{c_p \rho} \frac{\partial q_x}{\partial dx}
+ \frac{\partial T}{\partial t} = -\frac{1}{c_p \rho} \frac{\partial q_x}{\partial x}
+ \label{eq:conservation}
 \end{equation}
 
-Putting these two equations together yields the \emph{diffusion equation}, one of the most widely-used equations in science.
+We can plug Equation \ref{eq:FourierThermal} into Equation \ref{eq:conservation} to produce a single equation for thermal conduction
 \begin{equation}
- \frac{\partial T}{\partial t} = -\frac{k}{c_p \rho} \frac{\partial^2 q_x}{\partial dx^2}
+ \frac{\partial T}{\partial t} = \frac{1}{c_p \rho} \frac{\partial}{\partial x} \left( k \frac{\partial q_x}{\partial x} \right)
 \end{equation}
-Redefining the coefficients on the right-hand side of the equation as $\kappa$ yields:
+
+
+If we assume that the thermal conductivity, $k$, is spatially uniform, then we can pull it outside the derivative. This yields the most common form of the \emph{diffusion equation}, one of the most widely-used equations in science.
 \begin{equation}
- \frac{\partial T}{\partial t} = -\kappa \frac{\partial^2 q_x}{\partial dx^2}
+ \frac{\partial T}{\partial t} = \frac{k}{c_p \rho} \frac{\partial^2 q_x}{\partial x^2}
 \end{equation}
-This can be used to model chemical fluxes, temperature fluxes, hillslope change, and many more processes.
+Redefining the coefficients on the right-hand side of the equation as $\kappa$, which is known as ``thermal diffusivity'' and for many Earth materials $\approx 10^{-6}$ m$^2$ s$^{-1}$ yields:
+\begin{equation}
+ \frac{\partial T}{\partial t} = \kappa \frac{\partial^2 q_x}{\partial x^2}
+\end{equation}
+In addition to heat transfer, the diffusion equation cab be used to model any process in which a rate is linearly dependent on the difference in values of some state variable. This includes chemical fluxes, temperature fluxes, groundwater flow, hillslope geomorphic change, ...
 
 \subsection{Discretization}
 
+The simplest way to ``discretize'' an equation, or turn it into something that can represent changes over finite (i.e., $\Delta x = \text{ some number } > 0$) distances, is to replace the d$x$ or $\partial x$ terms with a finite $\Delta x$. In doing so, we need to take into account a couple of considerations:
+\begin{enumerate}
+ \item What do our grids of variables look like?
+ \item Do we want to generate differences forwards or backwards in time? (I am focusing on changes in time here, but you can really model a function -- in this case, integrating it numerically -- over any variable.)
+\end{enumerate}
 
+\subsubsection{Grids}
+
+For our thermal diffusion example, there are two (or three) important grids, each of which I will represent as a column vector (not to waste space, but to prepare you for matrix methods to be introduced in a later section). The first is our temperatures:
+\begin{equation}
+ \boldsymbol{T} =
+ \begin{bmatrix}
+  T_{1} \\
+  T_{2} \\
+  \vdots \\
+  T_{m}
+ \end{bmatrix}
+\end{equation}
+
+And the second is position:
+\begin{equation}
+ \boldsymbol{T} =
+ \begin{bmatrix}
+  x_{1} \\
+  x_{2} \\
+  \vdots \\
+  x_{m}
+ \end{bmatrix}
+\end{equation}
+
+\subsubsection{Differences}
+
+In order to do finite difference calculations, we must make, well, finite differences! But how should we define our differences? There are a few ways. Using the example of $T(x)$:
+
+\begin{itemize}
+ \item Left-handed or ``upwind'' difference scheme:
+ \begin{equation}
+ 1
+ \end{equation}
+ %\item \frac{dT}{dx} = \frac{T^{
+\end{itemize}
+
+
+
+
+
+\begin{equation}
+ \frac{\Delta T}{\Delta t} = \kappa \frac{\partial^2 q_x}{\partial x^2}
+\end{equation}
 
 
 
