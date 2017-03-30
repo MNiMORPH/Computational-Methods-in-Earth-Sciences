@@ -310,15 +310,29 @@ Go ahead and brainstorm how you might use this in your own work; we may spend so
 
 \lstinputlisting{code/FilesData/ClastCounts.py}
 
+\section{Plotting with Matplotlib}
+
+We've been using Matplotlib fairly informally for quite a lot of the above examples. To learn about it more in depth, one can look at the Matplotlib tutorial (\url{http://matplotlib.org/users/tutorials.html}). After going through some of these -- the more basic ones are also those that are used most commonly -- you should take a hike over to the Matplotlib gallery (\url{http://matplotlib.org/gallery.html}). This has a huge range of plots with the code required to make them, and you can find one that looks like what you want and modify to suit your current goals.
+
 \section{Stream gauging: an example}
 
-\todo{Write new example for Monday with code from laptop that I wrote for the Mississippi}
+This example code uses Ulmo, a Python module that handles hydrology data sets. Here, I have written a (somewhat sloppy) piece of code for us to go through, and to use as the basis for independent exploration of how to navigate these data structures and to give you a place to start in plotting data. The code, as it stands here, pulls Upper Mississippi mainstem gauging records and retrieves some information from them before writing a CSV file.
 
-\section{Plotting geospatial data using Basemap}
+Note that the top section of the code that is inside the triple quotes (same as what is used for docstrings, to be treated as a comment) was a failed attempt to get the USGS gauging data via a different Ulmo interface. This was my first try, and I will often keep such first tries around for some time, until I've found a better way and/or archived them in the git (or other VCS) repository, with an appropriate commit message so I can recall what I changed.
+
+\lstinputlisting{code/FilesData/UpperMississippiDischarge.py}
+
+\section{Python--GIS integration}
+
+Python is the scripting language for GRASS GIS, ArcGIS, and QGIS. It also has its own bindings to GDAL and OGR.
+
+\section{Geospatial data}
+
+\subsection{Plotting with CartoPy}
 
 You might want to do some mapping without starting a full-fledged GIS. For that, I have often used the Python mapping toolkit called \lstinline{basemap}. This one cannot be installed via \lstinline{pip} or \lstinline{easy_install}: you will have to download it and run \lstinline{python setup.py install}. For instructions, see the Basemap toolkit webpage at \url{http://matplotlib.org/basemap/users/installing.html}. You can make really gorgeous maps with it; see \url{http://matplotlib.org/basemap/users/examples.html}.
 
-There is also a newer mapping toolkit called CartoPy. It *is* available via pip, and you can read its help files at \url{http://scitools.org.uk/cartopy/docs/latest/index.html}. It is supposed to be better than Basemap in some ways (see \url{http://ocefpaf.github.io/python4oceanographers/blog/2013/09/23/cartopy/}), and has a really nice looking map gallery with good code examples provided as well \url{http://scitools.org.uk/cartopy/docs/latest/gallery.html} though as with many newer things, it is still in development.
+There is also a newer mapping toolkit called CartoPy. It *is* available via pip, and you can read its help files at \url{http://scitools.org.uk/cartopy/docs/latest/index.html}. It is supposed to be better than Basemap in some ways (see \url{http://ocefpaf.github.io/python4oceanographers/blog/2013/09/23/cartopy/}), and has a really nice looking map gallery with good code examples provided as well \url{http://scitools.org.uk/cartopy/docs/latest/gallery.html} though as with many newer things, it is still in development. (Note: ``new'' as of 2 years ago; now, in 2017, is much more mature.
 
 \begin{framed}
 \noindent\textbf{Additional help}
@@ -337,12 +351,16 @@ Here, I return to the TRMM dataset that we used earlier to show a global plot th
 \caption{TRMM data from June 2004 (which is when the writer of these course notes graduated from high school), now nicely plotted on a real Earth. Yes, we're getting closer to being computational Earth scientists!}
 \end{figure}
 
-\section{Plotting geospatial data using CartoPy}
-
-\section{Python--GIS integration}
-
 \subsection{GDAL and OGR}
 
+Note above.
+
 \url{https://pcjericks.github.io/py-gdalogr-cookbook/}
+
+[More examples to go here for next week]
+
+\subsection{Visualization: GIS, Google Earth}
+
+[holding space here]
 
 \end{document}
