@@ -204,13 +204,66 @@ I usually think of matrix multiplication as ``over... down''. But some better me
 \end{align}
 Here, the empty matrix can be filled with the values by multiplying the rows and columns that project (on a straight line) into that cell. (Thanks to Jack for both of these.)
 
-\subsection{Determinants}
+\subsubsection{Determinants}
 
-\todo{}
+The determinant of a matrix provides information that can help us with:
+\begin{itemize}
+ \item Systems of linear equations
+ \item Matrix inversions
+\end{itemize}
 
-\subsection{Matrix equations}
+The determinant of a matrix, $\mathbf{A}$, is denoted:
+\begin{equation}
+ |\mathbf{A}|.
+\end{equation}
 
-\todo{}
+For a 2$\times$2 matrix, the determinant is:
+\begin{equation}
+ \mathbf{A} = 
+ \begin{vmatrix}
+  a_{1,1} & a_{1,2} \\
+  a_{2,1} & a_{2,2} \\
+ \end{vmatrix}
+ = a_{1,1} a_{2,2} - a_{1,2} a_{2,1}
+\end{equation}
+While I prefer to include subscripts with a single letter, this is more commonly displayed in math textbooks as:
+\begin{equation}
+ \begin{vmatrix}
+  a & b \\
+  c & d \\
+ \end{vmatrix}
+ = a d - b c
+\end{equation}
+
+For a 3$\times$3 matrix, one takes an additional step. I am showing the method called Laplace Expansion, because it has an easy-to-remember pattern.
+\begin{equation}
+ \mathbf{A} = 
+ \begin{vmatrix}
+  a_{1,1} & a_{1,2} & a_{1,3} \\
+  a_{2,1} & a_{2,2} & a_{2,3} \\
+  a_{3,1} & a_{3,2} & a_{3,3} \\
+ \end{vmatrix}
+ = a_{1,1}
+ \begin{vmatrix}
+  a_{1,2} & a_{1,3} \\
+  a_{2,2} & a_{2,3} \\
+ \end{vmatrix}
+- a_{1,2}
+ \begin{vmatrix}
+  a_{1,1} & a_{1,3} \\
+  a_{2,1} & a_{2,3} \\
+ \end{vmatrix}
++ a_{1,3}
+ \begin{vmatrix}
+  a_{1,1} & a_{1,2} \\
+  a_{2,1} & a_{2,2} \\
+ \end{vmatrix}
+\end{equation}
+ 
+Note the pattern -- eliminate the rows and columns in straight lines from each term on one row (you may pick any row... or column, I think, though I haven't tried this), and then solve.
+
+Following this same nested-determinant and $+, -, +, -, ...$ pattern, you can solve any determinant to an arbitrarily large matrix. But perhaps you see one reason why we have computers.
+
 
 \subsubsection{Dot products}
 
@@ -242,8 +295,15 @@ If you know the angle, $\theta_{\vec{a},\vec{b}}$, between the two vectors, a do
  \left| \vec{a} \right|  \left| \vec{b} \right| \cos{ \left( \theta_{\vec{a},\vec{b}} \right) }
 \end{equation}
 
-
 \subsubsection{Cross products}
+
+A cross product, or ``vector product'', gives the magnitude and direction of a product of two vectors, $\vec{a}$ and $\vec{b}$, where the magnitude is the area of the parallelogram created by the two vectors and the direction is given by the right-hand rule.
+
+Cross-products are useful for:
+\begin{itemize}
+ \item Vector 
+\end{itemize}
+
 
 \begin{figure}[ht!]
 \begin{center}
@@ -252,8 +312,6 @@ If you know the angle, $\theta_{\vec{a},\vec{b}}$, between the two vectors, a do
  \caption{Graphical definition of the cross-product of two vectors. \url{https://commons.wikimedia.org/wiki/File:Cross_product_parallelogram.svg}.}
 \end{figure}
 
-A cross product, or ``vector product'', gives the magnitude and direction of a product of two vectors, $\vec{a}$ and $\vec{b}$, where the magnitude is the area of the parallelogram created by the two vectors and the direction is given by the right-hand rule. 
-
 \begin{figure}[ht!]
 \begin{center}
  \includegraphics[width=.5\linewidth]{figures/NumericalAndMath/507px-Right_hand_rule_cross_product.png}
@@ -261,15 +319,27 @@ A cross product, or ``vector product'', gives the magnitude and direction of a p
  \caption{Direction of a cross-product of vectors $\vec{a} \times \vec{b}$ as given by the right-hand rule. \url{https://commons.wikimedia.org/wiki/File:Right_hand_rule_cross_product.svg}.}
 \end{figure}
 
-The cross product can be solved in a 3-space (so for two orthogonal 2-D vectors) by solving the determinant of
+The cross product can be solved in a 3-space (so for two orthogonal 2-D vectors) by solving the determinant of the following equation, here given in a 3-space ($\mathbb{R}^3$):
+\begin{equation}
+\vec{u} \times \vec{v} =
+\begin{vmatrix}
+  \hat{i}	&	\hat{j}	&	\hat{k}\\
+  u_1		&	u_2	&	u_3\\
+  v_1		&	v_2	&	v_3\\
+\end{vmatrix}
+\end{equation}
 
-The scalar value of the cross product can also be obtained as follows:
 
-\subsection{Dot and cross products}
+The scalar value (i.e., magnitude) of the cross product can also be obtained as follows:
+\begin{equation}
+\left\| \vec{a} \times \vec{b} \right\| = \left\| \vec{a} \right\| \left\| \vec{b} \right\| \sin \theta
+\end{equation}
+
+\subsubsection{Dot and cross products}
 
 The relationship between the dot and cross products is that:
 \begin{equation}
- \left\| \vec{a} \times vec{b} \right\|^2  = \left\| \vec{a}\right\|^2  \left\|\vec{b}\right\|^2 - (\vec{a} \cdot \vec{b})^2
+ \left\| \vec{a} \times \vec{b} \right\|^2  = \left\| \vec{a}\right\|^2  \left\|\vec{b}\right\|^2 - (\vec{a} \cdot \vec{b})^2
 \end{equation}
 
 
@@ -483,5 +553,269 @@ Linearizing equations (is this the right word? turning them into a set of linear
 Differential equations and linear algebra review
 
 Include examples
+
+\section{Example: hillslope diffusion}
+
+This example is from something I wrote for CSDMS, \url{http://csdms.colorado.edu/wiki/Introduction_to_Python}
+
+\subsection{Theory}
+
+Numerical models are fundamentally a computer-readable way to interpret rules that we have provided about how the natural world should work. Here, we are creating a simple model of a hillslope profile with rivers incising on either end. We don't worry about regolith development or any specific hillslope processes. In our case, these rules take the form of partial differential equations. It is extremely important to have a full grasp of and—insofar as it is possible—analytical solution for these equations before beginning.
+
+Here, we make the simple assumption that regolith discharge is a linear function of slope:
+
+\begin{equation}
+Q = - k S
+\end{equation}
+
+Here, <math>Q</math> is regolith discharge [square meters per year], <math>S</math> is slope [unitless], and <math>k</math> is a constant of proportionality that scales slope to discharge. The negative sign is present because we want positive discharge where there are negative (i.e. downhill) slopes (or, in other words, elevation decreasing as <math>x</math>-distance increases).
+
+We want all of our equations in terms of elevation <math>z</math>, and distance across the hillslope profile, <math>x</math>. Substituting these into <math>S</math> gives us:
+
+\begin{equation}
+Q = - k \frac{dz}{dx}
+\end{equation}
+
+Hillslope evolution occurs when we combine these discharges to conserve mass. We use a continuity equation for conservation of volume to state that:
+
+\begin{equation}
+\frac{\partial z}{\partial t} = - \frac{\partial Q}{\partial x}
+\end{equation}
+
+Combining these two terms together gives us the diffusion equation:
+
+\begin{equation}
+\frac{\partial z}{\partial t} = \frac{\partial}{\partial x} \left(k \frac{\partial z}{\partial x}\right)
+\end{equation}
+
+If we assume that the hillslope diffusivity, <math>k</math>, is uniform across the landscape, we obtain the diffusion equation in its more familiar form:
+\begin{equation}
+\frac{\partial z}{\partial t} = k \frac{\partial^2 z}{\partial x^2}
+\end{equation}
+
+\subsection{Source code}
+
+First, I will write the whole source code. Then I will break it down into sections where I explain each component. Then I will present a new model that uses an implicit matrix-style solution instead of a foward-time-stepping solution, and write about numerical (finite difference) methods.
+
+\begin{lstlisting}[language=Python]
+#! /usr/bin/python
+
+# Import modules
+import numpy as np
+from matplotlib import pyplot as plt
+
+"""
+Copyright 2012 Andrew D. Wickert
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+################################################################################
+# hill.py
+# 
+# HILLSLOPE PROFILE
+# 
+# Center of hill is at 0, two incising channels at steady rate at edges
+# no channel-hillslope feedback and assuming entire hill is made of mobile 
+# regolith
+# 
+# This is a very simple example code in which variables are defined inline, 
+# and the equations are solved by forward difference methods without 
+# consideration for stability
+# 
+# Written by Andrew D. Wickert; August, 2013
+################################################################################
+
+# We will have the simple boundary condition of rivers on either end of the 
+# hillslope that are incising at the same, steady rate.
+zdot_channel = 2E-4 # [m], 0.5 mm/yr boundary incision
+
+# time
+dt = 100. # [years], the time step (from guessing, not from stability analysis)
+t_final = 4E5 # [years], the final time for hillslope evolution
+timesteps = np.arange(0,t_final + dt/10.,dt) # [years]
+
+# Set up domain
+dx = 10 # [m]
+xmax = 500 # [m]
+x = np.arange(-xmax, xmax + dx/10., dx) # [m], +dx/10. to make sure that edges are included
+z = t_final * zdot_channel * np.ones(x.shape) # [m], elevation in meters - set such that the edges are 0 at t_final
+
+# We're using a very simplified assumption that the rate of hillslope 
+# material transport is linearly proportional to local slope, and that this 
+# constant of proportionality is constant across the hill
+k = 5E-3 # Slope -- soil flux scaling
+
+# Loop through time and evolve elevation
+for t in timesteps:
+  # The channels set the boundaries
+  z[0] -= zdot_channel * dt
+  z[-1] -= zdot_channel * dt
+  # for np.diff, out[n] = a[n+1] - a[n]
+  # We are calculating the slopes between each of the cells, then using 
+  # these to solve for discharge of material between interior cells.
+  S = np.diff(z) # [-] slope
+  Q = -k*S # [m**2/yr] discharge, goes downslope, hence the negative sign # POSITIVE - WHY? CANCELLED OUT AGAIN!
+  # The change in internal elevation, due to conservation of mass, is equal 
+  # once again to the x-defivative
+  dzdt_interior = np.diff(Q)
+  z[1:-1] -= dzdt_interior * dt
+  # (It would have been quicker to take both derivatives at once, but would be 
+  # somewhat less intuitive for descriptive purposes)
+
+# Plot
+plt.plot(x,z,'k-',linewidth=3)
+plt.title('Final hillslope profile', fontsize=20, weight='bold')
+plt.xlabel('Distance across hillside [m]', fontsize=16)
+plt.ylabel('Elevation [m]', fontsize=16)
+plt.xlim((x[0],x[-1]))
+plt.show()
+\end{lstlisting}
+
+\subsubsection{The ``Shebang''}
+
+This script starts with:
+\begin{lstlisting}[language=Python]
+#! /usr/bin/python
+This is a "shebang" that tells the program where to look for the Python interpreter on Unix-like systems (the most popular being Mac and Linux, the former more popular for desktop applications and the latter more popular for supercomputers). You can find where Python is located by typing:
+<syntaxhighlight lang=bash>
+which python
+\end{lstlisting}
+at the Unix command prompt (i.e. terminal).
+
+\subsubsection{Module Import (and Namespaces)}
+\begin{lstlisting}[language=Python]
+# Import modules
+import numpy as np
+from matplotlib import pyplot as plt
+\end{lstlisting}
+
+Python is a general-purpose language, which means that for specific functionalities, you have to import ''modules''. These modules are sets of functions that share a namespace (''np'' and ''plt'', respectively). '''Numpy''' does general mathematical and ''n''-dimensional array operations, and '''Pyplot''' does basic plotting. "Sharing a namespace" means that to call functions within these modules, we must use the ''np'' and ''plt'' prefixes, e.g., to plot a parabola:
+
+\begin{lstlisting}[language=Python]
+a = np.array([[0,1,2,3,4],[0,1,4,9,16]]) # Create an array with 2 rows and 3 columns - nested sets of brackets add dimensions to the array
+plt.plot(a[0,:], a[1,:], 'ko-') # Plot the first row of "a" as ''x''-values and the second row as ''y''-values with a dashed line between points
+plt.show() # Show the plot in a display screen
+\end{lstlisting}
+
+Namespaces are important, because it means that you cannot easily accidentally overwrite the name of a function by giving a variable that name. For example, typing "np.mean = 1.5" seems a less-likely accident than writing "mean = 1.5".
+
+\subsubsection{Copyright Notice}
+
+The aforementioned code is trivial, but lately (2012) it seems that big, ugly patent wars are being fought over trivial chunks of code. So better to be safe than sorry. Below is text included for version 3 of the [http://www.gnu.org GNU] General Public License (GPL). This is an open-source "copyleft" license, meaning that if this code is included in a project, the project must be open-source with a "copyleft" license as well. This is a very good license for science, which is a community-driven collaborative effort. To give your code the GNU GPL v3, include the following text (though replacing my name with yours in the copyright, unless you are feeling generous).
+
+In order for your code to be included in CSDMS, you need to include some type of open-source license, even if it is not as strong a license as the GPL v3.
+
+\begin{lstlisting}[language=Python]
+"""
+Copyright 2012 Andrew D. Wickert
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+\end{lstlisting}
+
+On a technical note, the triple quotes at the beginning and end of the block are used in Python to create blocks of text as strings. These can be used later inside functions, blocks of code designed for a single purpose, to provide accessible documentation. For now, since we are not assigning this string anywhere, it simply functions as a comment.
+
+\subsubsection{Introductory Comments and Authorship}
+
+This section is huge overkill for this short of a model, but I put it in here to be complete.
+
+\begin{lstlisting}[language=Python]
+################################################################################
+# hill.py
+# 
+# HILLSLOPE PROFILE
+# 
+# Center of hill is at 0, two incising channels at steady rate at edges
+# no channel-hillslope feedback and assuming entire hill is made of mobile 
+# regolith
+# 
+# This is a very simple example code in which variables are defined inline, 
+# and the equations are solved by forward difference methods without 
+# consideration for stability
+# 
+# Written by Andrew D. Wickert; August, 2013
+################################################################################
+\end{lstlisting}
+
+\subsubsection{Initialization}
+
+\begin{lstlisting}[language=Python]
+# We will have the simple boundary condition of rivers on either end of the 
+# hillslope that are incising at the same, steady rate.
+zdot_channel = 2E-4 # [m], 0.5 mm/yr boundary incision
+
+# time
+dt = 100. # [years], the time step (from guessing, not from stability analysis)
+t_final = 4E5 # [years], the final time for hillslope evolution
+timesteps = np.arange(0,t_final + dt/10.,dt) # [years]
+
+# Set up domain
+dx = 10 # [m]
+xmax = 500 # [m]
+x = np.arange(-xmax, xmax + dx/10., dx) # [m], +dx/10. to make sure that edges are included
+z = t_final * zdot_channel * np.ones(x.shape) # [m], elevation in meters - set such that the edges are 0 at t_final
+
+# We're using a very simplified assumption that the rate of hillslope 
+# material transport is linearly proportional to local slope, and that this 
+# constant of proportionality is constant across the hill
+k = 5E-3 # Slope -- soil flux scaling
+\end{lstlisting}
+
+\subsubsection{Main Loop}
+
+\begin{lstlisting}[language=Python]
+# Loop through time and evolve elevation
+for t in timesteps:
+  # The channels set the boundaries
+  z[0] -= zdot_channel * dt
+  z[-1] -= zdot_channel * dt
+  # for np.diff, out[n] = a[n+1] - a[n]
+  # We are calculating the slopes between each of the cells, then using 
+  # these to solve for discharge of material between interior cells.
+  S = np.diff(z) # [-] slope
+  Q = -k*S # [m**2/yr] discharge, goes downslope, hence the negative sign # POSITIVE - WHY? CANCELLED OUT AGAIN!
+  # The change in internal elevation, due to conservation of mass, is equal 
+  # once again to the x-defivative
+  dzdt_interior = np.diff(Q)
+  z[1:-1] -= dzdt_interior * dt
+  # (It would have been quicker to take both derivatives at once, but would be 
+  # somewhat less intuitive for descriptive purposes)
+\end{lstlisting}
+
+\subsubsection{Plotting}
+
+\begin{lstlisting}[language=Python]
+# Plot
+plt.plot(x,z,'k-',linewidth=3)
+plt.title('Final hillslope profile', fontsize=20, weight='bold')
+plt.xlabel('Distance across hillside [m]', fontsize=16)
+plt.ylabel('Elevation [m]', fontsize=16)
+plt.xlim((x[0],x[-1]))
+plt.show()
+\end{lstlisting}
+
 
 \end{document}          
