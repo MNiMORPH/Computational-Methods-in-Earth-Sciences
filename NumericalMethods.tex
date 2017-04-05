@@ -817,5 +817,32 @@ plt.xlim((x[0],x[-1]))
 plt.show()
 \end{lstlisting}
 
+\subsection{Numerical stability}
+
+Run \url{hillslope_diffusion_no_matrix.py} or \url{hillslope_diffusion_no_matrix_plot_through_time.py}, found in the \url{code/NumericalMethods} folder. You get a nice, rounded hillslope!
+
+Now, run the same code, but change \url{dx} to 101 years. What happens? It goes unstable. You can play around with this.
+
+What is the problem? Well, we are projecting out into the future along a straight line. sometimes this is a good approximation. Sometimes this isn't.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\linewidth]{figures/NumericalAndMath/ForwardDifferenceError_Hungary.png}
+\end{center}
+ \caption{Euler forward numerical integration discretization error; figure from course notes at \url{http://moodle.autolab.uni-pannon.hu/Mecha_tananyag/mechatronikai_modellezes_angol/ch07.html}}
+\end{figure}
+
+When is it a good approximation? And how can we improve the approximation? Well, because our solution (hillslope diffusion) is directly analogous to the classic thermal diffusion problem, we can follow a scheme so classic that it is even on Wikipedia (\url{https://en.wikipedia.org/wiki/Von_Neumann_stability_analysis}).
+
+How do we improve stability?
+\begin{itemize}
+ \item Reduce the time-step
+ \item Increase the spatial discretization
+ \item Write a local approximation that is closer to the curve (Taylor series approximation)
+ \item Find a clever mathematical way around our ``shooting forward in time [or other variable]'' method of numerical integration.
+\end{itemize}
+
+
+
 
 \end{document}          
